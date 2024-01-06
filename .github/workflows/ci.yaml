@@ -13,10 +13,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      repository-projects: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -30,8 +26,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      packages: write
+        contents: write
+        pull-requests: write
+        repository-projects: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
