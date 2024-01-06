@@ -1,75 +1,110 @@
 @polyfea/core / [Exports](modules.md)
 
-[![Built With Stencil](https://img.shields.io/badge/-Built%20With%20Stencil-16161d.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI%2BCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU%2BCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MjQuNywzNzMuOWMwLDM3LjYtNTUuMSw2OC42LTkyLjcsNjguNkgxODAuNGMtMzcuOSwwLTkyLjctMzAuNy05Mi43LTY4LjZ2LTMuNmgzMzYuOVYzNzMuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQyNC43LDI5Mi4xSDE4MC40Yy0zNy42LDAtOTIuNy0zMS05Mi43LTY4LjZ2LTMuNkgzMzJjMzcuNiwwLDkyLjcsMzEsOTIuNyw2OC42VjI5Mi4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDI0LjcsMTQxLjdIODcuN3YtMy42YzAtMzcuNiw1NC44LTY4LjYsOTIuNy02OC42SDMzMmMzNy45LDAsOTIuNywzMC43LDkyLjcsNjguNlYxNDEuN3oiLz4KPC9zdmc%2BCg%3D%3D&colorA=16161d&style=flat-square)](https://stenciljs.com)
+# Polyfea microfrontend core library and browser driver
 
-# Stencil Component Starter
+This package is the backbone of the Polyfea microfrontend framework. It manages the lifecycle of microfrontends. It also includes a browser driver for interfacing with the Polyfea microfrontend controller.
 
-This is a starter project for building a standalone Web Component using Stencil.
-
-Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
-
-# Stencil
-
-Stencil is a compiler for building fast web apps using Web Components.
-
-Stencil combines the best concepts of the most popular frontend frameworks into a compile-time rather than run-time tool.  Stencil takes TypeScript, JSX, a tiny virtual DOM layer, efficient one-way data binding, an asynchronous rendering pipeline (similar to React Fiber), and lazy-loading out of the box, and generates 100% standards-based Web Components that run in any browser supporting the Custom Elements v1 spec.
-
-Stencil components are just Web Components, so they work in any major framework or with no framework at all.
-
-## Getting Started
-
-To start building a new web component using Stencil, clone this repo to a new directory:
+## Installation
 
 ```bash
-git clone https://github.com/ionic-team/stencil-component-starter.git my-component
-cd my-component
-git remote rm origin
+npm install @polyfea/core
 ```
 
-and run:
+# Documentation
 
-```bash
-npm install
-npm start
+- The [_polyfea-context_](src/components/polyfea-context/readme.md) element loads microfrontends into the document, _replacing_ itself (by `display: contents`) with the microfrontend's content.
+- The [_Polyfea_](docs/classes/Polyfea.md) class is for advanced use cases, providing control over the loading of microfrontends and elements.
+- The [Navigation polyfill](docs/interfaces/Navigation.md) intercepts navigation events and enables programmatic navigation in browsers that don't yet support the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API).
+- The [href](https://github.com/polyfea/core/blob/main/docs/modules.md#href) function helps with navigation in the single page application.
+
+## Usage
+
+The core library enables the Polyfea microfrontend controller to manage microfrontends. Use the `<polyfea-context name="my-context"></polyfea-context>` element to load resources and elements for a specific context.
+
+### Example: Using Boot Script from NPM Package
+
+This example is useful for testing microfrontends with the standalone _Polyfea_ driver during development. Set up your index.html file as follows:
+
+```html
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <base href="/ui/">
+  <title>Sample polyfea microfrontend</title>
+   <!-- Alows for repeated registration of the same custom elements. 
+        Possible values are: verbose, silent, warn, error -->
+  <meta name="polyfea-duplicit-custom-elements" content="verbose">
+ 
+  <!--  Microfrontend configuration is taken from the backend. 
+        You may specify the static configuration. 
+        It will expect StaticConfig json resource to be available 
+        at document.baseURI relative path ./polyfea/static-config
+        See https://github.com/polyfea/browser-api/blob/main/docs/interfaces/StaticConfig.md
+   -->
+  <meta name="polyfea-backend" content="static://"> 
+  
+  <!-- Load polyfea driver-->
+  <script type="module" src="node_modules/@polyfea/core/dist/boot.mjs"></script>
+  <!-- you may replace above line with a a loading from release assets -->
+  <!-- <script type="module" src="https://github.com/octo-org/octo-repo/releases/latest/download/boot.mjs"></script> -->
+</head>
+<body></body>
+</html>
 ```
 
-To build the component for production, run:
+The code above loads the Polyfea driver and dynamically inserts the `<polyfea-context name="shell" take="1"></polyfea-context>` element into the document body. This element is populated with microfrontend content from the backend.
 
-```bash
-npm run build
+Your static configuration should be in the `/ui/polyfea/static-config` JSON file, served by your development server. For more information, see [StaticConfig](https://github.com/polyfea/browser-api/blob/main/docs/interfaces/StaticConfig.md).
+
+```json
+{
+    "microfrontends": {
+        "my-fea": {
+            "module": "./dist/myfea.esm.js",
+            "resources": [
+                {
+                    "kind": "stylesheet",
+                    "href": "./build/material-shell-webc.css"
+                }
+            ]
+        },
+        "my-other-fea": {
+            "dependsOn": [
+                "my-fea"
+            ],
+            "module": "./build/material-shell-webc.esm.js",
+            "resources": [
+                {
+                    "kind": "stylesheet",
+                    "href": "./build/material-shell-webc.css"
+                }
+            ]
+        }
+    },
+    "contextAreas": [
+        { 
+            "name": "shell",
+            "contextArea": {
+                "elements": [
+                    {
+                        "tagName": "my-shell-element",
+                        "microfrontend": "my-fea"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "my-context",
+            "contextArea": {
+                "elements": [
+                    {
+                        "tagName": "my-other-element",
+                        "microfrontend": "my-other-fea"
+                    }
+                ]
+            }
+        }]
+}
 ```
 
-To run the unit tests for the components, run:
-
-```bash
-npm test
-```
-
-Need help? Check out our docs [here](https://stenciljs.com/docs/my-first-component).
-
-## Naming Components
-
-When creating new component tags, we recommend _not_ using `stencil` in the component name (ex: `<stencil-datepicker>`). This is because the generated component has little to nothing to do with Stencil; it's just a web component!
-
-Instead, use a prefix that fits your company or any name for a group of related components. For example, all of the Ionic generated web components use the prefix `ion`.
-
-## Using this component
-
-There are three strategies we recommend for using web components built with Stencil.
-
-The first step for all three of these strategies is to [publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages).
-
-### Script tag
-
-- Put a script tag similar to this `<script type='module' src='https://unpkg.com/my-component@0.0.1/dist/my-component.esm.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### Node Modules
-- Run `npm install my-component --save`
-- Put a script tag similar to this `<script type='module' src='node_modules/my-component/dist/my-component.esm.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### In a stencil-starter app
-- Run `npm install my-component --save`
-- Add an import to the npm packages `import my-component;`
-- Then you can use the element anywhere in your template, JSX, html etc
+Use the `polyfea-context` element in your document to dynamically load elements and microfrontends based on your configuration. This element will be replaced with the loaded microfrontend content. It's ideal for loading elements developed by other teams or subprojects with separate development and release cycles. Avoid using `polyfea-context` for custom elements in the same repository.

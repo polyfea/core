@@ -84,7 +84,7 @@ Event.constructor
 
 #### Defined in
 
-src/core/navigation.ts:116
+[src/core/navigation.ts:116](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L116)
 
 ## Properties
 
@@ -170,7 +170,7 @@ ___
 
 #### Defined in
 
-src/core/navigation.ts:137
+[src/core/navigation.ts:137](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L137)
 
 ___
 
@@ -272,7 +272,7 @@ ___
 
 #### Defined in
 
-src/core/navigation.ts:133
+[src/core/navigation.ts:133](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L133)
 
 ___
 
@@ -285,7 +285,7 @@ ___
 
 #### Defined in
 
-src/core/navigation.ts:142
+[src/core/navigation.ts:142](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L142)
 
 ___
 
@@ -316,7 +316,7 @@ ___
 
 #### Defined in
 
-src/core/navigation.ts:147
+[src/core/navigation.ts:147](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L147)
 
 ___
 
@@ -329,7 +329,7 @@ ___
 
 #### Defined in
 
-src/core/navigation.ts:152
+[src/core/navigation.ts:152](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L152)
 
 ___
 
@@ -339,7 +339,7 @@ ___
 
 #### Defined in
 
-src/core/navigation.ts:114
+[src/core/navigation.ts:114](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L114)
 
 ___
 
@@ -439,7 +439,7 @@ ___
 
 #### Defined in
 
-src/core/navigation.ts:117
+[src/core/navigation.ts:117](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L117)
 
 ___
 
@@ -470,7 +470,7 @@ ___
 
 #### Defined in
 
-src/core/navigation.ts:157
+[src/core/navigation.ts:157](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L157)
 
 ___
 
@@ -543,7 +543,7 @@ node_modules/typescript/lib/lib.dom.d.ts:8107
 
 #### Defined in
 
-src/core/navigation.ts:162
+[src/core/navigation.ts:162](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L162)
 
 ## Methods
 
@@ -624,7 +624,7 @@ Prevents the browser from following the navigation request.
 
 #### Defined in
 
-src/core/navigation.ts:168
+[src/core/navigation.ts:168](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L168)
 
 ___
 

@@ -8,7 +8,7 @@ on:
     pull_request:
         branches: [ "main" ]
     release:
-        types: [created]
+        types: [published]
 
 jobs:
   build:
@@ -49,9 +49,12 @@ jobs:
             token: ${{ secrets.NPM_PUBLISH_TOKEN }}
             access: "public"
       - name: upload boot-mjs
-        uses: shogo82148/actions-upload-release-asset@v1
+        uses: WebFreak001/upload-asset@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: dist/boot.mjs
-          asset_content_type: application/javascript
+          file: ./dist/boot.mjs
+          mime: application/javascript
+          name: boot.mjs
+        
      
