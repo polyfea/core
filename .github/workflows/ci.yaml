@@ -1,0 +1,57 @@
+
+
+name: Build and Publish Package
+
+on: 
+    push:
+        branches: [ "main"]
+    pull_request:
+        branches: [ "main" ]
+    release:
+        types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 21
+      - run: npm ci
+      - run: npm run build 
+      - run: npm test
+  publish_package:
+    if: github.event_name == 'release'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 21
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+      - run: npm run build
+      - id: semver
+        uses: ildug/get-tag-action@v1
+      - run: npm version --git-tag-version=false ${{ steps.semver.outputs.version }} 
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            registry: "https://npm.pkg.github.com"
+            access: "public"
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+            token: ${{ secrets.NPM_PUBLISH_TOKEN }}
+            access: "public"
+      - name: upload boot-mjs
+        uses: shogo82148/actions-upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: dist/boot.mjs
+          asset_content_type: application/javascript
+     
