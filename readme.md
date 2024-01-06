@@ -10,9 +10,9 @@ npm install @polyfea/core
 
 # Documentation
 
-- The [_polyfea-context_](src\components\polyfea-context\readme.md) element loads microfrontends into the document, _replacing_ itself (by `display: contents`) with the microfrontend's content.
-- The [_Polyfea_](docs\classes\Polyfea.md) class is for advanced use cases, providing control over the loading of microfrontends and elements.
-- The [Navigation polyfill](docs\classes\Navigation.md) intercepts navigation events and enables programmatic navigation in browsers that don't yet support the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API).
+- The [_polyfea-context_](src/components/polyfea-context/readme.md) element loads microfrontends into the document, _replacing_ itself (by `display: contents`) with the microfrontend's content.
+- The [_Polyfea_](docs/classes/Polyfea.md) class is for advanced use cases, providing control over the loading of microfrontends and elements.
+- The [Navigation polyfill](docs/classes/Navigation.md) intercepts navigation events and enables programmatic navigation in browsers that don't yet support the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API).
 ## Usage
 
 The core library enables the Polyfea microfrontend controller to manage microfrontends. Use the `<polyfea-context name="my-context"></polyfea-context>` element to load resources and elements for a specific context.
