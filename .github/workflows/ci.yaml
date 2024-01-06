@@ -13,6 +13,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -35,6 +39,14 @@ jobs:
           node-version: 21
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
+      - name: upload boot-mjs
+        uses: WebFreak001/upload-asset@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          file: ./dist/boot.mjs
+          mime: application/javascript
+          name: boot.mjs
       - run: npm run build
       - id: semver
         uses: ildug/get-tag-action@v1
@@ -48,13 +60,6 @@ jobs:
         with:
             token: ${{ secrets.NPM_PUBLISH_TOKEN }}
             access: "public"
-      - name: upload boot-mjs
-        uses: WebFreak001/upload-asset@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          file: ./dist/boot.mjs
-          mime: application/javascript
-          name: boot.mjs
+      
         
      
