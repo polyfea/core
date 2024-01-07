@@ -23,7 +23,7 @@
   "scripts": {
     "build.stencil": "stencil build --docs",
     "build.boot": "vite build",
-    "build": "run-s build.stencil build.boot",
+    "build": "run-s build.stencil build.boot typedoc",
     "start": "stencil build --dev --watch --serve",
     "test.stencil": "stencil test --spec --e2e",
     "test.core": "vitest --run",

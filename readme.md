@@ -44,7 +44,7 @@ This example is useful for testing microfrontends with the standalone _Polyfea_ 
   <!-- Load polyfea driver-->
   <script type="module" src="node_modules/@polyfea/core/dist/boot.mjs"></script>
   <!-- you may replace above line with a a loading from release assets -->
-  <!-- <script type="module" src="https://github.com/octo-org/octo-repo/releases/latest/download/boot.mjs"></script> -->
+  <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@polyfea/core@1/dist/boot.mjs"></script> -->
 </head>
 <body></body>
 </html>

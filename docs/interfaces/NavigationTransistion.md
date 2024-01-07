@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[src/core/navigation.ts:206](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L206)
+[src/core/navigation.ts:206](https://github.com/polyfea/core/blob/1c60298/src/core/navigation.ts#L206)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[src/core/navigation.ts:207](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L207)
+[src/core/navigation.ts:207](https://github.com/polyfea/core/blob/1c60298/src/core/navigation.ts#L207)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[src/core/navigation.ts:208](https://github.com/polyfea/core/blob/b395591/src/core/navigation.ts#L208)
+[src/core/navigation.ts:208](https://github.com/polyfea/core/blob/1c60298/src/core/navigation.ts#L208)
