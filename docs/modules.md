@@ -77,7 +77,7 @@ render() {
 
 #### Defined in
 
-[src/core/navigation.ts:244](https://github.com/polyfea/core/blob/1c60298/src/core/navigation.ts#L244)
+[src/core/navigation.ts:254](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L254)
 
 ___
 
@@ -92,13 +92,11 @@ if it is not provided on the window.
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `raiseHistoryPopState` | `boolean` | `false` | A boolean indicating whether to raise the 'popstate' event on the window object when the history changes. Default is `false`. It is useful for testing purposes, as some test environments do not raise the 'popstate' event on the window object when the history changes, in all other cases it should be `false`. |
+| `raiseHistoryPopState` | `boolean` | `false` | A boolean indicating whether to raise the 'popstate' event on the window object when the history changes. Default is `false`. It is useful if you want to get popstate notification on history.pushstate but is nonstandard behavior. |
 
 #### Returns
 
 [`Navigation`](interfaces/Navigation.md)
-
-The (@see Navigation ) instance present on the global context after the call.
 
 **`Remarks`**
 
@@ -108,7 +106,7 @@ programmatic handlers to capture navigation requests.
 
 #### Defined in
 
-[src/core/navigation.ts:274](https://github.com/polyfea/core/blob/1c60298/src/core/navigation.ts#L274)
+[src/core/navigation.ts:283](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L283)
 
 ___
 
@@ -125,4 +123,4 @@ if it is provided on the window. Used in tests to clean up the global state.
 
 #### Defined in
 
-[src/core/navigation.ts:282](https://github.com/polyfea/core/blob/1c60298/src/core/navigation.ts#L282)
+[src/core/navigation.ts:291](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L291)
