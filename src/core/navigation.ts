@@ -131,7 +131,7 @@ export class NavigateEvent extends Event {
     /** (@see https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent )
     **/
     readonly destination: NavigationDestination;
-    
+
     /** (@see https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent )
     **/
     readonly canIntercept: boolean;
@@ -208,6 +208,16 @@ export interface NavigationTransistion {
     type: TransitionMode
 }
 
+class NavigationTransitionPolyfill implements NavigationTransistion {
+    constructor(
+        private readonly request: TransitionRequest,
+    ) {}
+    get finished() { return firstValueFrom(this.request.finished); }
+    get from() { return this.request.entry; }
+    get type() { return this.request.mode; }
+}
+
+
 /**
  * The `href` function can be used to augment anchor elements to programmatically invoke Navigation.navigate.
  * It returns an object with a `href` property and an `onclick` event handler.
@@ -268,8 +278,7 @@ export function href(url: string | URL): { href: string, onclick: (event: Event)
  * programmatic handlers to capture navigation requests.
  * 
  * @param raiseHistoryPopState - A boolean indicating whether to raise the 'popstate' event on the window object when the history changes. Default is `false`. 
- * It is useful for testing purposes, as some test environments do not raise the 'popstate' event on the window object when the history changes, in all other cases it should be `false`.
- * @returns The (@see Navigation ) instance present on the global context after the call.
+ * It is useful if you want to get popstate notification on history.pushstate but is nonstandard behavior.
  */
 export function registerNavigationPolyfill(raiseHistoryPopState = false) {
     return NavigationPolyfill.tryRegister(raiseHistoryPopState);
@@ -294,6 +303,18 @@ interface TransitionRequest {
     abortController: AbortController
     transition: NavigationTransistion
     traverseToKey: string
+}
+
+class TransitionSubscriber {
+    private readonly commited$: AsyncSubject<void>;
+    private readonly finished$: AsyncSubject<void>;
+    constructor( request: TransitionRequest) {
+        this.commited$ = request.committed;
+        this.finished$ = request.finished;
+    }
+
+    get commited() { return firstValueFrom(this.commited$); }
+    get finished() { return firstValueFrom(this.finished$); }   
 }
 
 class NavigationPolyfill extends EventTarget {
@@ -362,12 +383,13 @@ class NavigationPolyfill extends EventTarget {
         this.currentEntry.dispatchEvent(new NavigationCurrentEntryChangeEvent("replace", this.currentEntry));
     }
 
-    public  entriesList: Array<NavigationHistoryEntryPolyfill> = []
+    public entriesList: Array<NavigationHistoryEntryPolyfill> = []
     private idCounter: number = 0;
     private transitionRequests = new Subject<TransitionRequest>();
     private currentTransition: TransitionRequest = null;
     private currentEntryIndex: number = -1;
     private doUnregister: () => void;
+    private readonly pushstateDelay = 35;
 
 
     private rawHistoryMethods = {
@@ -403,14 +425,8 @@ class NavigationPolyfill extends EventTarget {
             transition: null,
 
         }
-
-        request.abortController.signal.addEventListener("abort", () => {
-            request.finished.error("aborted");
-            request.committed.error("aborted");
-        },
-            { once: true });
         this.transitionRequests.next(request);
-        return { commited: firstValueFrom(request.committed), finished: firstValueFrom(request.finished) };
+        return new TransitionSubscriber(request);
     }
 
     private async executeRequest(request: TransitionRequest) {
@@ -424,18 +440,18 @@ class NavigationPolyfill extends EventTarget {
             this.clearTransition(request);
         }
 
-        request.transition = {
-            finished: firstValueFrom(request.finished),
-            from: this.currentEntry,
-            type: request.mode,
-        };
+        request.transition = new NavigationTransitionPolyfill(request);
         this.currentTransition = request;
 
         try {
             await this.commit(request);
             this.currentEntry.dispatchEvent(new NavigationCurrentEntryChangeEvent(request.mode, request.transition.from));
             await this.dispatchNavigation(request);
-        } finally {
+        } catch {
+            request.finished.error("aborted");
+            request.committed.error("aborted");
+        }
+        finally {
             this.clearTransition(request);
         }
     }
@@ -464,7 +480,7 @@ class NavigationPolyfill extends EventTarget {
     }
 
     private clearTransition(request: TransitionRequest) {
-        if(this.currentTransition?.entry.id === request.entry.id) {
+        if (this.currentTransition?.entry.id === request.entry.id) {
             this.currentTransition = null;
         }
     }
@@ -478,71 +494,52 @@ class NavigationPolyfill extends EventTarget {
         }
     }
 
-    private commitPushTransition(request: TransitionRequest): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
-            globalThis.addEventListener("popstate", (ev: PopStateEvent) => {
-                if (ev.state === request.entry) {
-                    this.entriesList = [... this.entriesList.slice(0, ++this.currentEntryIndex), request.entry];
-                    request.committed.next();
-                    request.committed.complete();
-                    resolve();
-                } else {
-                    request.committed.error(new Error("popstate event fired with unexpected state- posiibly conflict between NavigationPolyfill and native history api"));
-                    reject();
-                }
+
+    private async pushstateAsync(request:TransitionRequest, commitActor: (request:TransitionRequest) => void = ()=>{}) : Promise<void> {
+        return new Promise<void>((resolve, _reject) => {
+            setTimeout(() => {
+                commitActor(request);
+                request.committed.next();
+                request.committed.complete();
+                resolve();
             },
-                { once: true, }
-            );
-            this.rawHistoryMethods.pushState.apply(globalThis.history, [request.entry, '', request.href]);
+                this.pushstateDelay);
+        });
+    }
+    private commitPushTransition(request: TransitionRequest): Promise<void> {
+        this.rawHistoryMethods.pushState.apply(globalThis.history, [request.entry.cloneable, '', request.href]);
+        return this.pushstateAsync(request, (request) => {
+            this.entriesList = [... this.entriesList.slice(0, ++this.currentEntryIndex), request.entry];
         });
     }
 
     private commitReplaceTransition(request: TransitionRequest): Promise<void> {
         request.entry.key = this.currentEntry.key;
         this.entriesList[this.currentEntryIndex] = request.entry;
-        return new Promise<void>((resolve, reject) => {
-            globalThis.addEventListener("popstate", (ev: PopStateEvent) => {
-                if (ev.state === request.entry) {
-                    request.committed.next();
-                    request.committed.complete();
-                    resolve();
-                } else {
-                    request.committed.error(new Error("popstate event fired with unexpected state- posiibly conflict between NavigationPolyfill and native history api"));
-                    reject();
-                }
-            },
-                { once: true }
-            );
-            this.rawHistoryMethods.replaceState.apply(globalThis.history, [request.entry, '', request.href]);
-        });
-
+        
+        this.rawHistoryMethods.replaceState.apply(globalThis.history, [request.entry.cloneable, '', request.href]);
+        return this.pushstateAsync(request);
     }
 
     private commitTraverseTransition(request: TransitionRequest): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>(async (resolve, reject) => {
             const targetEntryIndex = this.entriesList.findIndex(_ => _.key === request.traverseToKey);
-                if (targetEntryIndex < 0) {
-                    reject("target entry not found");
-                }
-            const delta = targetEntryIndex - this.currentEntryIndex;
-            globalThis.addEventListener("popstate", (ev: PopStateEvent) => {
-                if (ev.state === request.entry) {
+            if (targetEntryIndex < 0) {
+                reject("target entry not found");
+            }
+            const delta = targetEntryIndex - this.currentEntryIndex;            
+            this.rawHistoryMethods.go.apply(globalThis.history, [delta]);
+            await this.pushstateAsync(request, (request) => {
+            
                     const targetEntryIndex = this.entriesList.findIndex(_ => _.key === request.traverseToKey);
-                    if(targetEntryIndex < 0) {
+                    if (targetEntryIndex < 0) {
                         request.committed.error(new Error("target entry not found"))
                     }
                     this.currentEntryIndex = targetEntryIndex;
                     request.committed.next();
                     request.committed.complete();
                     resolve();
-                } else {
-                    request.committed.error(new Error("popstate event fired with unexpected state- posiibly conflict between NavigationPolyfill and native history api"));
-                    reject();
-                }
-            },
-                { once: true, }
-            );
-            this.rawHistoryMethods.go.apply(globalThis.history, [delta]);
+            });
         });
     }
 
@@ -599,36 +596,36 @@ class NavigationPolyfill extends EventTarget {
             if (raiseHistoryPopState) {
                 this.rawHistoryMethods.pushState = () => {
                     raw_pushState.apply(globalThis.history, arguments);
-                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry });
-                    (ev as any).state = this.currentTransition.entry;
+                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry.cloneable });
+                    (ev as any).state = this.currentTransition.entry.cloneable;
                     setTimeout(() => globalThis.dispatchEvent(ev), 25);
                 }
 
                 this.rawHistoryMethods.replaceState = () => {
                     raw_replaceState.apply(globalThis.history, arguments);
-                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry });
-                    (ev as any).state = this.currentTransition.entry;
+                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry.cloneable });
+                    (ev as any).state = this.currentTransition.entry.cloneable;
                     setTimeout(() => globalThis.dispatchEvent(ev), 25);
                 }
 
                 this.rawHistoryMethods.go = () => {
                     raw_go.apply(globalThis.history, arguments);
-                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry });
-                    (ev as any).state = this.currentTransition.entry;
+                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry.cloneable });
+                    (ev as any).state = this.currentTransition.entry.cloneable;
                     setTimeout(() => globalThis.dispatchEvent(ev), 25);
                 }
 
                 this.rawHistoryMethods.back = () => {
                     raw_back.apply(globalThis.history, arguments);
-                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry });
-                    (ev as any).state = this.currentTransition.entry;
+                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry.cloneable });
+                    (ev as any).state = this.currentTransition.entry.cloneable;
                     setTimeout(() => globalThis.dispatchEvent(ev), 25);
                 }
 
                 this.rawHistoryMethods.forward = () => {
                     raw_forward.apply(globalThis.history, arguments);
-                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry });
-                    (ev as any).state = this.currentTransition.entry;
+                    const ev = new PopStateEvent("popstate", { state: this.currentTransition.entry.cloneable });
+                    (ev as any).state = this.currentTransition.entry.cloneable;
                     setTimeout(() => globalThis.dispatchEvent(ev), 25);
                 }
             } else {
@@ -667,35 +664,33 @@ class NavigationPolyfill extends EventTarget {
                     const committed = new AsyncSubject<void>();
                     committed.complete();
                     let entry: NavigationHistoryEntryPolyfill;
-                    if( ev.state?.key) {
+                    if (ev.state?.key) {
                         const targetIndex = this.entriesList.findIndex(_ => _.key === ev.state?.key);
-                        if(targetIndex >= 0) {
+                        if (targetIndex >= 0) {
                             this.currentEntryIndex = targetIndex;
                             entry = this.entriesList[targetIndex];
                         }
                     }
-                    if(!entry) {
+                    if (!entry) {
                         let id = `@${++this.idCounter}-navigation-polyfill-popstate`;
                         entry = new NavigationHistoryEntryPolyfill(this, id, id, globalThis.location.href, ev.state);
                         this.entriesList = [... this.entriesList.slice(0, ++this.currentEntryIndex), entry];
                     }
                     const finished = new AsyncSubject<void>();
-                    const transition: TransitionRequest = {
+                    const transitionRequest: TransitionRequest = {
                         mode: "traverse",
                         href: globalThis.location.href,
                         info: undefined,
-                        state: ev.state?.getState() || ev.state,
+                        state: ev.state?.state || ev.state,
                         committed, finished,
                         entry: entry,
                         abortController: new AbortController(),
                         traverseToKey: ev.state?.key,
-                        transition: {
-                            finished: firstValueFrom(finished),
-                            from: this.currentEntry,
-                            type: "traverse",
-                        },
+                        transition: null
                     }
-                    this.currentTransition = transition;
+                    transitionRequest.transition = new NavigationTransitionPolyfill(transitionRequest);
+
+                    this.currentTransition = transitionRequest;
                     this.dispatchNavigation(this.currentTransition);
                 });
         }
@@ -726,6 +721,16 @@ class NavigationHistoryEntryPolyfill extends EventTarget implements NavigationHi
 
     setState(state: any) {
         this.state = state;
+    }
+
+    get cloneable() {
+        return {
+            id: this.id,
+            key: this.key,
+            url: this.url,
+            index: this.index,
+            state: this.state,
+        }
     }
 
 }

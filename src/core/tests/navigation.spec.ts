@@ -30,6 +30,58 @@ test("navigate: ALL EVENTS invoked when navigating", async () => {
     expect(true).toBeTruthy()
 });
 
+test("navigate: currentRequest is null when navigation is finished", async () => {
+    //given
+    const sut = registerNavigationPolyfill(true) as Navigation;
+
+    //when
+    
+    await sut.navigate("./some").finished;
+    
+    //then
+    // all events were invoked
+    expect((sut as any).currentTransition).toBeFalsy()
+});
+
+test("navigate: conflicting requests", async () => {
+    //given
+    const sut = registerNavigationPolyfill(true) as Navigation;
+
+    //when
+    
+    sut.navigate("./some"); // do not wait the next request shall abort it
+    await sut.navigate("./some").finished;
+    
+    //then
+    // all events were invoked
+    expect((sut as any).currentTransition).toBeFalsy()
+});
+
+
+test("navigate: sequence of navigations", async () => {
+    //given
+    const sut = registerNavigationPolyfill(true) as Navigation;
+
+    await  sut.navigate("./some").finished;
+    await  sut.navigate("./some1").finished;
+
+    //when
+    const awaiter = Promise.all([
+        new Promise<void>((resolve, _) => sut.addEventListener("navigatesuccess", () => resolve())),
+        new Promise<void>((resolve, _) => sut.addEventListener("navigate", () => resolve()))
+    ]);
+   
+
+    const signals = sut.navigate("./some2");
+
+    await signals.commited;
+    await signals.finished;
+    await awaiter;
+
+    //then
+    // all events were invoked
+    expect(true).toBeTruthy()
+});
 
 test("href: navigate raised", async () => {
     //given
