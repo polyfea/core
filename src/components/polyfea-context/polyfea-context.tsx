@@ -103,7 +103,6 @@ export class PolyfeaContext {
           next: _ => this.contextObj = _,
           error: _ => {
             console.warn(`<polyfe-context name="${this.areaName}">: Using slotted content because of error: ${_}`);
-            
             if(  Build.isDev) {
               throw _;
             }

@@ -1,4 +1,4 @@
-import {  Observable, concatWith, defer, of, switchMap, tap, throwError } from "rxjs";
+import {  Observable, catchError, concatWith, defer, of, retry, switchMap, tap, throwError, timer } from "rxjs";
 import { PolyfeaBackend } from "./internal";
 import { ApiResponse, Configuration, ContextArea, PolyfeaApi } from "@polyfea/browser-api";
 
@@ -53,10 +53,16 @@ export class FetchBackend implements PolyfeaBackend {
         if (cached) {
             const context = JSON.parse(cached) as ContextArea;
             return of(context).pipe(
-                concatWith(fetched)
+                concatWith(fetched),
+                catchError(( err ) => {
+                    console.warn(`Failed to fetch context area ${contextName} from ${path}, using cached version as the last known value`, err);
+                    return of(context);
+                }), 
             );
         } else {
-            return fetched;
+            return fetched.pipe(
+                retry({ count: 3, delay: (retryIx: number) =>timer((retryIx+1)* 2000) })
+            );
         }
     }
 }

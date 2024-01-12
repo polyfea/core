@@ -1,4 +1,4 @@
-import { Observable, distinctUntilChanged, fromEvent, startWith, switchMap } from "rxjs";
+import { Observable, catchError, distinctUntilChanged, fromEvent, of, startWith, switchMap } from "rxjs";
 import { PolyfeaBackend } from "./internal";
 import { StaticBackend } from "./static-backend";
 import { FetchBackend } from "./fetch-backend";
@@ -98,6 +98,7 @@ declare global {
 };
 
 class PolyfeaImpl implements Polyfea {
+
     constructor(private readonly config?: Configuration) {
         if (globalThis.navigation) {
             globalThis.navigation.addEventListener('navigate', (event: NavigateEvent) => {
@@ -134,8 +135,15 @@ class PolyfeaImpl implements Polyfea {
         if (globalThis.navigation) {
             return fromEvent(globalThis.navigation, "navigatesuccess").pipe(
                 startWith(new Event('navigatesuccess', { bubbles: true, cancelable: true })),
-                switchMap(_ => this.getBackend().getContextArea(contextName)),
-                distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))
+                switchMap(_ => 
+                    this.getBackend().getContextArea(contextName).pipe(
+                        catchError(err => {
+                            console.error(err);
+                            return of({elements:[], microfrontends:{}})
+                        })
+                    )
+                ),
+                distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
             );
         } else {
             return this.getBackend().getContextArea(contextName).pipe(
@@ -160,7 +168,14 @@ class PolyfeaImpl implements Polyfea {
         }
 
         dependencyPath.push(name);
-        mcfe.dependsOn && await Promise.all(mcfe.dependsOn.map(dep => this.loadMicrofrontendRecursive(ctx, dep, dependencyPath)));
+        mcfe.dependsOn && await
+         Promise.all(mcfe.dependsOn.map(dep => this.loadMicrofrontendRecursive(ctx, dep, dependencyPath).catch(
+            err => {
+                console.error(`Failed to load microfrontend's ${name} dependency ${dep}`, err);
+                // continue without error - could be important or cosmetic dependency, let browser resolve 
+                // final behavior
+            }
+         )));
 
         let resources = mcfe.resources || [];
         if (mcfe.module) {
@@ -190,7 +205,7 @@ class PolyfeaImpl implements Polyfea {
     }
 
     private loadScript(resource: MicrofrontendResource): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>((resolve, _reject) => {
             const script = document.createElement('script');
             script.src = resource.href;
             script.setAttribute('async', ""); // load async by default
@@ -207,13 +222,15 @@ class PolyfeaImpl implements Polyfea {
                 script.onload = () => {
                     resolve();
                 }
+                script.onerror = () => {
+                    this.loadedResources.delete(resource.href);
+                    console.error(`Failed to load script ${resource.href} while loading microfrontend resources, check the network tab for details`); 
+                    resolve(); // continue without error to keep ui responsive to navigations from other contexts
+                }
             } else {
                 resolve();
             }
-            script.onerror = () => {
-                this.loadedResources.delete(resource.href);
-                reject();
-            }
+            
             document.head.appendChild(script);
         });
     }
@@ -236,19 +253,21 @@ class PolyfeaImpl implements Polyfea {
         resource.attributes && Object.entries(resource.attributes).forEach(([name, value]) => {
             link.setAttribute(name, value);
         });
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>((resolve, _reject) => {
             this.loadedResources.add(resource.href);
             if (resource.waitOnLoad) {
                 link.onload = () => {
                     resolve();
                 }
+                link.onerror = () => {
+                    this.loadedResources.delete(resource.href);
+                    console.error(`Failed to load ${resource.href} while loading microfrontend resources, check the network tab for details`);
+                    resolve(); // continue without error to keep ui responsive to navigations from other contexts
+                }
             } else {
                 resolve();
             }
-            link.onerror = () => {
-                this.loadedResources.delete(resource.href);
-                reject();
-            }
+            
             document.head.appendChild(link);
         });
     }
