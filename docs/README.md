@@ -33,7 +33,7 @@ This example is useful for testing microfrontends with the standalone _Polyfea_ 
   <title>Sample polyfea microfrontend</title>
    <!-- Alows for repeated registration of the same custom elements. 
         Possible values are: verbose, silent, warn, error -->
-  <meta name="polyfea-duplicit-custom-elements" content="verbose">
+  <meta name="polyfea.duplicit-custom-elements" content="verbose">
  
   <!--  Microfrontend configuration is taken from the backend. 
         You may specify the static configuration. 
@@ -41,7 +41,7 @@ This example is useful for testing microfrontends with the standalone _Polyfea_ 
         at document.baseURI relative path ./polyfea/static-config
         See https://github.com/polyfea/browser-api/blob/main/docs/interfaces/StaticConfig.md
    -->
-  <meta name="polyfea-backend" content="static://"> 
+  <meta name="polyfea.backend" content="static://"> 
   
   <!-- Load polyfea driver-->
   <script type="module" src="node_modules/@polyfea/core/dist/boot.mjs"></script>
@@ -108,3 +108,28 @@ Your static configuration should be in the `/ui/polyfea/static-config` JSON file
 ```
 
 Use the `polyfea-context` element in your document to dynamically load elements and microfrontends based on your configuration. This element will be replaced with the loaded microfrontend content. It's ideal for loading elements developed by other teams or subprojects with separate development and release cycles. Avoid using `polyfea-context` for custom elements in the same repository.
+
+## Configuration
+
+You can influence the behavior of the package by setting the `<meta>` tags in the `<head>` of your document. Below is a list of supported meta tag names and their contents:
+
+| Attribute Name               | Default | Description |
+|----------------------------- | ------- | ----------- |
+| polyfea.backend              | ./polyfea | Specifies the API URL for retrieving information about configured context areas. If preceded with `static://`, then the `static-config` API path is called at module load instead of calling `context-area` queries for each context area. |
+| polyfea.cyclic-context-areas | error   | Determines behavior when cyclic nested context areas are used to avoid infinite recursion. Possible values are `error` (displays an error in the document flow), `silent` (provides no output), and `allow` (allows areas recursion). |
+| polyfea.cyclic-context-message|         | Error message to show if context area name recursion is detected. |
+| csp-none                    |         | Nonce to use for dynamically inserted scripts and styles. This nonce must match the nonce used in the [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_Security_Policy) header. This method is safe, as scripts must be secured before being able to read the DOM. |
+| polyfea.duplicit-custom-elements | warn | Behavior when duplicate custom elements are registered at [`window.customElements`](https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements). Possible values are `silent`, `verbose`, `warn`, and `error`. |
+
+## Developing
+
+To begin development on this package, follow these steps:
+
+1. Clone the repository to your local machine.
+2. Run `npm install` to install the necessary dependencies.
+3. Execute `npm run start` to start the development server.
+4. Adapt the `src/index.html` file to meet the specific requirements of your development task.
+
+With these steps, you can easily set up your development environment and make changes to the package as needed.
+
+Run `npm run typedoc` and `npm run build` before commiting to ensure up-to-date documentation in repository.

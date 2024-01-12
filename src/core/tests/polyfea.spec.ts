@@ -148,7 +148,7 @@ test('getContextArea: static config setup', async () => {
         fixture.staticConfig);
 
     const meta = (globalThis as unknown as Window).document.createElement('meta');
-    meta.setAttribute('name', 'polyfea-backend');
+    meta.setAttribute('name', 'polyfea.backend');
     meta.setAttribute('content', 'static://');
     (globalThis as unknown as Window).document.head.appendChild(meta);
 
@@ -386,7 +386,7 @@ test('initialization: enable duplicate custom element registration', async () =>
 test('initialization: it is possible to configure error behavior for duplicate custom element registration', async () => {
     // given
     const meta = document.createElement("meta");
-    meta.setAttribute("name", "polyfea-duplicit-custom-elements");
+    meta.setAttribute("name", "polyfea.duplicit-custom-elements");
     meta.setAttribute("content", "error");
     document.head.appendChild(meta);
 

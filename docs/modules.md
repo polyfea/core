@@ -77,7 +77,7 @@ render() {
 
 #### Defined in
 
-[src/core/navigation.ts:254](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L254)
+[src/core/navigation.ts:254](https://github.com/polyfea/core/blob/b6f2b8c/src/core/navigation.ts#L254)
 
 ___
 
@@ -106,7 +106,7 @@ programmatic handlers to capture navigation requests.
 
 #### Defined in
 
-[src/core/navigation.ts:283](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L283)
+[src/core/navigation.ts:283](https://github.com/polyfea/core/blob/b6f2b8c/src/core/navigation.ts#L283)
 
 ___
 
@@ -123,4 +123,4 @@ if it is provided on the window. Used in tests to clean up the global state.
 
 #### Defined in
 
-[src/core/navigation.ts:291](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L291)
+[src/core/navigation.ts:291](https://github.com/polyfea/core/blob/b6f2b8c/src/core/navigation.ts#L291)

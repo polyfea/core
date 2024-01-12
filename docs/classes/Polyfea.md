@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[src/core/polyfea.ts:61](https://github.com/polyfea/core/blob/a14af01/src/core/polyfea.ts#L61)
+[src/core/polyfea.ts:61](https://github.com/polyfea/core/blob/b6f2b8c/src/core/polyfea.ts#L61)
 
 ## Methods
 
@@ -52,7 +52,7 @@ The responses are cached in localStorage. They are first served from the cache a
 
 #### Defined in
 
-[src/core/polyfea.ts:45](https://github.com/polyfea/core/blob/a14af01/src/core/polyfea.ts#L45)
+[src/core/polyfea.ts:45](https://github.com/polyfea/core/blob/b6f2b8c/src/core/polyfea.ts#L45)
 
 ___
 
@@ -79,7 +79,7 @@ Error if the microfrontend specification is not found or if there is a circular 
 
 #### Defined in
 
-[src/core/polyfea.ts:55](https://github.com/polyfea/core/blob/a14af01/src/core/polyfea.ts#L55)
+[src/core/polyfea.ts:55](https://github.com/polyfea/core/blob/b6f2b8c/src/core/polyfea.ts#L55)
 
 ___
 
@@ -104,7 +104,7 @@ Otherwise, a new instance is created with the given configuration.
 
 #### Defined in
 
-[src/core/polyfea.ts:70](https://github.com/polyfea/core/blob/a14af01/src/core/polyfea.ts#L70)
+[src/core/polyfea.ts:70](https://github.com/polyfea/core/blob/b6f2b8c/src/core/polyfea.ts#L70)
 
 ___
 
@@ -129,4 +129,4 @@ This is particularly useful when different microfrontends need to register the s
 
 #### Defined in
 
-[src/core/polyfea.ts:88](https://github.com/polyfea/core/blob/a14af01/src/core/polyfea.ts#L88)
+[src/core/polyfea.ts:85](https://github.com/polyfea/core/blob/b6f2b8c/src/core/polyfea.ts#L85)

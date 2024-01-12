@@ -81,9 +81,6 @@ export class Polyfea {
      * This method also initializes the Navigation polyfill if it's not already present.
      * It augments `window.customElements.define` to allow for duplicate registration of custom elements.
      * This is particularly useful when different microfrontends need to register the same dependencies.
-     * 
-     * @param config - Configuration for the `PolyfeaApi`. 
-     * For more details, refer to the [`PolyfeaApi`](https://github.com/polyfea/browser-api/blob/main/docs/classes/PolyfeaApi.md) documentation.
      */
     static initialize() {
         if (!globalThis.polyfea) {
@@ -118,7 +115,7 @@ class PolyfeaImpl implements Polyfea {
 
     private getBackend(): PolyfeaBackend {
         if (!this.backend) {
-            let metaTagContent = document.querySelector('meta[name="polyfea-backend"]')?.getAttribute('content');
+            let metaTagContent = document.querySelector('meta[name="polyfea.backend"]')?.getAttribute('content');
             if (metaTagContent) {
                 if (metaTagContent.startsWith("static://")) {
                     const url = metaTagContent.slice(9)
@@ -264,9 +261,9 @@ class PolyfeaImpl implements Polyfea {
         registerNavigationPolyfill();
 
         /// custom elements can be repeatedly registered due to the rebundling in multiple web-components
-        // get meta tag with name polyfea-duplicit-custom-elements
+        // get meta tag with name polyfea.duplicit-custom-elements
         const metaTagContent = document
-            .querySelector('meta[name="polyfea-duplicit-custom-elements"]')
+            .querySelector('meta[name="polyfea.duplicit-custom-elements"]')
             ?.getAttribute('content');
         let duplicitCustomElements: string = "warn";
         if (metaTagContent === "silent") {
