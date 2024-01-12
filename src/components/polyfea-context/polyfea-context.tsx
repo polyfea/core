@@ -1,4 +1,4 @@
-import { Build, Component, Host, Prop, State, h } from '@stencil/core';
+import { Build, Component, Host, Prop, State, h, Element } from '@stencil/core';
 import {  Polyfea } from '../../core';
 import { switchMap } from 'rxjs';
 import { ContextArea, ElementSpec } from '@polyfea/browser-api';
@@ -24,7 +24,14 @@ import { ContextArea, ElementSpec } from '@polyfea/browser-api';
 })
 export class PolyfeaContext {
 
-  /** name of the context area to load.  */
+  /** The name of the context area to load. Either `context-name` or `name` shall be set.
+   *  The property `context-name` takes priority if it is set 
+   **/
+  @Prop({ attribute: "context-name"}) contextName: string;
+
+  /** The name of the context area to load. Either `context-name` or `name` shall be set.
+   *  The property `context-name` takes priority if it is set 
+   **/
   @Prop({ attribute: "name"}) name: string;
 
   /**
@@ -54,15 +61,26 @@ export class PolyfeaContext {
    */
   @Prop({ attribute: "extra-style"}) extraStyle: { [key: string]: string | number } = {};
 
+  @Prop({attribute: "polyfea-context-stack", mutable: true }) 
+  polyfeaContextStack: string[] 
+
   private polyfea: Polyfea;
+  private cyclicAreas: string = "none";
+  private cyclicErrorMsg: string = "";
+
+  private get areaName(): string {
+    return this.contextName || this.name;
+  }
+
+  @Element() private hostElement: HTMLElement
 
   @State()
   private contextObj: ContextArea;
 
   async componentWillLoad() {
-    if (this.name) {
+    if (this.areaName) {
       this.polyfea = Polyfea.getOrCreate();
-      this.polyfea.getContextArea(this.name)
+      this.polyfea.getContextArea(this.areaName)
         .pipe(
           // load microfrontends
           switchMap(ctx => {
@@ -84,7 +102,7 @@ export class PolyfeaContext {
         .subscribe({
           next: _ => this.contextObj = _,
           error: _ => {
-            console.warn(`<polyfe-context name="${this.name}">: Using slotted content because of error: ${_}`);
+            console.warn(`<polyfe-context name="${this.areaName}">: Using slotted content because of error: ${_}`);
             
             if(  Build.isDev) {
               throw _;
@@ -95,7 +113,52 @@ export class PolyfeaContext {
     }
   }
 
+  componentWillRender() {
+    if (this.polyfeaContextStack) return;
+
+    // find closest parent with property polyfeaContextStack to avoid cyclic context
+    let currentEl: HTMLElement = this.hostElement;
+    let stack: string[] = null;
+    while( stack === null && currentEl && currentEl.tagName !== "BODY" ) {
+      currentEl = currentEl.parentElement;
+      stack = (currentEl as any)?.polyfeaContextStack || null;
+    }
+    stack = stack || [];
+    if (stack.indexOf(this.areaName) >= 0) {
+      this.cyclicAreas = "error"
+      this.cyclicErrorMsg = "";
+      // check requested behavior from meta tag
+      let meta = document.head.querySelector("meta[name='polyfea.cyclic-context-areas']");
+      if (meta) {
+        const metaFlag = meta.getAttribute("content")
+        if (metaFlag == "allow" || metaFlag == "silent") {
+          this.cyclicAreas = metaFlag;
+        }
+      }
+
+      meta = document.head.querySelector("meta[name='polyfea.cyclic-context-message']");
+      if (meta) {
+        this.cyclicErrorMsg = meta.getAttribute("content");
+      }
+      this.cyclicErrorMsg ||= "Cyclic rendering of context areas detected: <br/>{stack}</br> Area ignored to avoid infinite recursion.";
+      this.cyclicErrorMsg = this.cyclicErrorMsg.replace(
+        "{stack}", 
+        stack
+          .map(_=> _===this.areaName ?  `<b>${_}</b>`: _)
+          .join(" -> ") + " ==> <b>" + this.areaName + "</b>");
+    }
+    stack.push(this.areaName)
+    this.polyfeaContextStack = stack;
+  }
+
   render() {
+    if( this.cyclicAreas == "error") {
+      return <div class="cyclic-error" innerHTML={this.cyclicErrorMsg}></div>
+    }
+    if( this.cyclicAreas == "silent" ) {
+      return "";
+    }
+
     let elements = this.contextObj?.elements || [];
     if (this.take > 0) {
       elements = elements.slice(0, this.take);
@@ -114,12 +177,12 @@ export class PolyfeaContext {
 
     const attr = Object.assign(
       {
-        context: this.name
+        context: this.areaName
       },
       element.attributes,
       this.extraAttributes,
       {
-        class: this.name + '-' + 'context'
+        class: this.areaName + '-' + 'context'
       }
     );
 

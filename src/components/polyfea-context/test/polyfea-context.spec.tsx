@@ -85,28 +85,29 @@ describe('polyfea-context', () => {
       </polyfea-context>
     `);
   });
-});
 
+  it('renders slot elements if no context name is provided', async () => {
+    const page = await newSpecPage({
+      url: 'http://test.polyfea.github.io/',
+      components: [PolyfeaContext],
+    });
 
-it('renders slot elements if no context name is provided', async () => {
-  const page = await newSpecPage({
-    url: 'http://test.polyfea.github.io/',
-    components: [PolyfeaContext],
+    page.doc.head.innerHTML = `<base href="/ui/"/>`;
+    await page.waitForChanges();
+    await page.setContent('<polyfea-context><div slot="a2">no context</div></polyfea-context>');
+    await setTimeout(() => { }, 350); // async refresh of context retrieval
+
+    expect(page.root).toEqualHtml(`
+    <polyfea-context>
+      <mock:shadow-root>
+        <slot></slot>
+      </mock:shadow-root>
+      <div slot="a2">
+        no context
+      </div>
+    </polyfea-context>
+  `);
   });
 
-  page.doc.head.innerHTML = `<base href="/ui/"/>`;
-  await page.waitForChanges();
-  await page.setContent('<polyfea-context><div slot="a2">no context</div></polyfea-context>');
-  await setTimeout(() => { }, 350); // async refresh of context retrieval
 
-  expect(page.root).toEqualHtml(`
-  <polyfea-context>
-    <mock:shadow-root>
-      <slot></slot>
-    </mock:shadow-root>
-    <div slot="a2">
-      no context
-    </div>
-  </polyfea-context>
-  `);
 });

@@ -9,6 +9,16 @@
     <script nomodule src="/build/core.js"></script>
   </head>
   <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+    <polyfea-context context-name="sample">
+      <div>Some sample context with nested cycle
+        <polyfea-context context-name="other">
+         <div>Some other context with nested cycle
+            <polyfea-context context-name="sample">
+              <div>Caution - this is a cycle</div>
+            </polyfea-context>
+      </div>
+        </polyfea-context>
+      </div>
+    </polyfea-context>
   </body>
 </html>

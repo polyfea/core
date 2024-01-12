@@ -37,7 +37,7 @@ Constructs a new NavigationDestination instance.
 
 #### Defined in
 
-[src/core/navigation.ts:102](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L102)
+[src/core/navigation.ts:102](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L102)
 
 ## Properties
 
@@ -49,4 +49,4 @@ The URL of the navigation destination.
 
 #### Defined in
 
-[src/core/navigation.ts:107](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L107)
+[src/core/navigation.ts:107](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L107)

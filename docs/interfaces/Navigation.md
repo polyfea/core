@@ -50,7 +50,7 @@ Returns a Boolean indicating whether the session history contains a previous ent
 
 #### Defined in
 
-[src/core/navigation.ts:26](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L26)
+[src/core/navigation.ts:26](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L26)
 
 ___
 
@@ -66,8 +66,7 @@ Returns a Boolean indicating whether the session history contains a next entry, 
 
 #### Defined in
 
-[src/core/navigation.ts:32](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L32)
-
+[src/core/navigation.ts:32](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L32)
 ___
 
 ### currentEntry
@@ -82,8 +81,7 @@ Represents the current entry in the session history.
 
 #### Defined in
 
-[src/core/navigation.ts:20](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L20)
-
+[src/core/navigation.ts:20](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L20)
 ___
 
 ### transition
@@ -98,7 +96,7 @@ Represents the current navigation transition.
 
 #### Defined in
 
-[src/core/navigation.ts:38](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L38)
+[src/core/navigation.ts:38](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L38)
 
 ## Methods
 
@@ -165,7 +163,7 @@ Navigates to the previous entry in the session history, if there is one.
 
 #### Defined in
 
-[src/core/navigation.ts:64](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L64)
+[src/core/navigation.ts:64](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L64)
 
 ___
 
@@ -213,7 +211,7 @@ Returns an array of all entries in the session history.
 
 #### Defined in
 
-[src/core/navigation.ts:44](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L44)
+src/core/navigation.ts:44](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L44)
 
 ___
 
@@ -244,7 +242,7 @@ Navigates to the next entry in the session history, if there is one.
 
 #### Defined in
 
-[src/core/navigation.ts:70](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L70)
+[src/core/navigation.ts:70](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L70)
 
 ___
 
@@ -280,7 +278,7 @@ Navigates to the specified URL.
 
 #### Defined in
 
-[src/core/navigation.ts:50](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L50)
+[src/core/navigation.ts:50](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L50)
 
 ___
 
@@ -311,7 +309,7 @@ Reloads the current entry in the session history.
 
 #### Defined in
 
-[src/core/navigation.ts:76](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L76)
+[src/core/navigation.ts:76](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L76)
 
 ___
 
@@ -374,7 +372,7 @@ Navigates to a specific entry in the session history.
 
 #### Defined in
 
-[src/core/navigation.ts:82](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L82)
+[src/core/navigation.ts:82](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L82)
 
 ___
 
@@ -401,4 +399,4 @@ Updates the current entry in the session history.
 
 #### Defined in
 
-[src/core/navigation.ts:88](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L88)
+[src/core/navigation.ts:88](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L88)

@@ -73,7 +73,7 @@ Event.constructor
 
 #### Defined in
 
-[src/core/navigation.ts:183](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L183)
+[src/core/navigation.ts:183](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L183)
 
 ## Properties
 
@@ -265,7 +265,7 @@ ___
 
 #### Defined in
 
-[src/core/navigation.ts:185](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L185)
+[src/core/navigation.ts:185](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L185)
 
 ___
 
@@ -293,7 +293,7 @@ ___
 
 #### Defined in
 
-[src/core/navigation.ts:184](https://github.com/polyfea/core/blob/a14af01/src/core/navigation.ts#L184)
+[src/core/navigation.ts:184](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L184)
 
 ___
 

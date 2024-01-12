@@ -18,6 +18,10 @@ export namespace Components {
      */
     interface PolyfeaContext {
         /**
+          * The name of the context area to load. Either `context-name` or `name` shall be set. The property `context-name` takes priority if it is set
+         */
+        "contextName": string;
+        /**
           * Defines additional attributes to be set on the rendered elements.   The attributes are set in the following order:  1. The `context` attribute, with its value set to the `name` property. 2. The attributes defined in the element specification of the context area. 3. The attributes defined in this property.
          */
         "extraAttributes": { [key: string]: string };
@@ -26,9 +30,10 @@ export namespace Components {
          */
         "extraStyle": { [key: string]: string | number };
         /**
-          * name of the context area to load.
+          * The name of the context area to load. Either `context-name` or `name` shall be set. The property `context-name` takes priority if it is set
          */
         "name": string;
+        "polyfeaContextStack": string[];
         /**
           * Specifies the number of context area elements to render.  If this property is unset or has a non-positive value, all elements will be rendered.
          */
@@ -69,6 +74,10 @@ declare namespace LocalJSX {
      */
     interface PolyfeaContext {
         /**
+          * The name of the context area to load. Either `context-name` or `name` shall be set. The property `context-name` takes priority if it is set
+         */
+        "contextName"?: string;
+        /**
           * Defines additional attributes to be set on the rendered elements.   The attributes are set in the following order:  1. The `context` attribute, with its value set to the `name` property. 2. The attributes defined in the element specification of the context area. 3. The attributes defined in this property.
          */
         "extraAttributes"?: { [key: string]: string };
@@ -77,9 +86,10 @@ declare namespace LocalJSX {
          */
         "extraStyle"?: { [key: string]: string | number };
         /**
-          * name of the context area to load.
+          * The name of the context area to load. Either `context-name` or `name` shall be set. The property `context-name` takes priority if it is set
          */
         "name"?: string;
+        "polyfeaContextStack"?: string[];
         /**
           * Specifies the number of context area elements to render.  If this property is unset or has a non-positive value, all elements will be rendered.
          */
