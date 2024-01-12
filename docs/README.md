@@ -132,4 +132,4 @@ To begin development on this package, follow these steps:
 
 With these steps, you can easily set up your development environment and make changes to the package as needed.
 
-Run `npm run typedoc` and `npm run build` before commiting to ensure up-to-date documentation in repository.
+Run `npm run build` before commiting to ensure up-to-date documentation in the repository.

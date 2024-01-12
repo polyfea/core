@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[src/core/navigation.ts:192](https://github.com/polyfea/core/blob/b6f2b8c/src/core/navigation.ts#L192)
+[src/core/navigation.ts:192](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L192)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[src/core/navigation.ts:193](https://github.com/polyfea/core/blob/b6f2b8c/src/core/navigation.ts#L193)
+[src/core/navigation.ts:193](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L193)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[src/core/navigation.ts:194](https://github.com/polyfea/core/blob/b6f2b8c/src/core/navigation.ts#L194)
+[src/core/navigation.ts:194](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L194)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[src/core/navigation.ts:195](https://github.com/polyfea/core/blob/b6f2b8c/src/core/navigation.ts#L195)
+[src/core/navigation.ts:195](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L195)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[src/core/navigation.ts:196](https://github.com/polyfea/core/blob/b6f2b8c/src/core/navigation.ts#L196)
+[src/core/navigation.ts:196](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L196)
 
 ## Methods
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[src/core/navigation.ts:198](https://github.com/polyfea/core/blob/b6f2b8c/src/core/navigation.ts#L198)
+[src/core/navigation.ts:198](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L198)
 
 ___
 

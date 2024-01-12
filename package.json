@@ -30,7 +30,7 @@
     "test": "run-s test.stencil test.core",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "typedoc": "npx typedoc --plugin typedoc-plugin-markdown src/core/index.ts"
+    "typedoc": "npx typedoc --plugin typedoc-plugin-markdown --gitRevision main src/core/index.ts"
   },
   "dependencies": {
     "@polyfea/browser-api": "^1.0.3",
