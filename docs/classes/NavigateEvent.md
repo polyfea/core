@@ -86,6 +86,7 @@ Event.constructor
 
 [src/core/navigation.ts:116](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L116)
 
+
 ## Properties
 
 ### AT\_TARGET
@@ -272,6 +273,7 @@ ___
 
 #### Defined in
 
+
 [src/core/navigation.ts:133](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L133)
 
 ___
@@ -330,7 +332,6 @@ ___
 #### Defined in
 
 [src/core/navigation.ts:152](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L152)
-
 ___
 
 ### interceptPromises
@@ -340,7 +341,6 @@ ___
 #### Defined in
 
 [src/core/navigation.ts:114](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L114)
-
 ___
 
 ### isTrusted

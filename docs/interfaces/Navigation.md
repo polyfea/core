@@ -67,7 +67,6 @@ Returns a Boolean indicating whether the session history contains a next entry, 
 #### Defined in
 
 [src/core/navigation.ts:32](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L32)
-
 ___
 
 ### currentEntry
@@ -83,7 +82,6 @@ Represents the current entry in the session history.
 #### Defined in
 
 [src/core/navigation.ts:20](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L20)
-
 ___
 
 ### transition
@@ -213,7 +211,7 @@ Returns an array of all entries in the session history.
 
 #### Defined in
 
-[src/core/navigation.ts:44](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L44)
+src/core/navigation.ts:44](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L44)
 
 ___
 
