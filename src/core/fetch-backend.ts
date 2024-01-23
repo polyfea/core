@@ -30,6 +30,9 @@ export class FetchBackend implements PolyfeaBackend {
             const basePath = baseURI.pathname;
             if (path.startsWith(basePath)) {
                 path = './' + path.substring(basePath.length);
+            } else if (basePath.endsWith("/") && path === basePath.substring(0, basePath.length - 1)) {
+                // use case where user navigates to base path without trailing slash
+                path = './';
             }
         }
 
