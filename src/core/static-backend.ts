@@ -11,8 +11,15 @@ export class StaticBackend implements PolyfeaBackend {
             if (api.length === 0) {
                 api = "./polyfea";
             }
+            polyfeaApi = new PolyfeaApi(new Configuration({ 
+                basePath: new URL(
+                    api, new URL(
+                        globalThis.document?.baseURI || "/", 
+                        globalThis.location?.href || "http://localhost")
+                ).href }));
             polyfeaApi = new PolyfeaApi(new Configuration({ basePath: api }));
         } else if (api instanceof Configuration) {
+
             polyfeaApi = new PolyfeaApi(api as Configuration);
         } else {
             polyfeaApi = api as PolyfeaApi;
@@ -29,6 +36,9 @@ export class StaticBackend implements PolyfeaBackend {
             const basePath = baseURI.pathname;
             if (path.startsWith(basePath)) {
                 path = './' + path.substring(basePath.length);
+            } else if (basePath.endsWith("/") && path === basePath.substring(0, basePath.length - 1)) {
+                // use case where user navigates to base path without trailing slash
+                path = './';
             }
         }
 

@@ -91,6 +91,30 @@ test('getContextArea: Path value is relative to base href', async () => {
     expect(contextArea).toStrictEqual(expectedContextArea);
 });
 
+test('getContextArea: Path value is relative to base href, no trailing slash', async () => {
+    // given
+    const fetchMock = FetchMock.sandbox();
+    fetchMock.get('http://localhost:8080/polyfea/context-area/test?path=.%2F', expectedContextArea);
+
+    const w = (globalThis as unknown as Window);
+    globalThis.location?.assign('http://localhost:8080/ui');
+    const baseHref = w.document.createElement('base');
+    baseHref.setAttribute('href', '/ui/');
+    w.document.head.appendChild(baseHref);
+
+    const config = new Configuration({
+        basePath: 'http://localhost:8080/polyfea',
+        fetchApi: fetchMock as unknown as FetchAPI
+    });
+
+    // when
+    const sut = new FetchBackend(config);
+    const contextArea = await firstValueFrom(sut.getContextArea('test'));
+
+    // then
+    expect(contextArea).toStrictEqual(expectedContextArea);
+});
+
 test('getContextArea: Fetched Context areas requests are stored in local storage for faster retrieval', async () => {
     // given
     const fetchMock = FetchMock.sandbox();
