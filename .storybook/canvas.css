@@ -1,0 +1,24 @@
+/* .storybook/canvas-styles.css */
+
+/* Ensure html and body take up full viewport height */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Include padding and border in element's total width/height */
+}
+
+/* Make the storybook-root div also take 100% height/width */
+#storybook-root, #root-inner {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* Often useful for flex children if your component uses 100% height internally */
+  display: flex;
+  flex-direction: column; /* Or 'row', depending on your layout needs */
+}

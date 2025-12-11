@@ -1,12 +1,9 @@
 // this is the entry point bundle for the browser 
-//  the stencil compilation must be exevuted before bundling polyfea boot loader
-import { Polyfea } from './polyfea';
-import { defineCustomElements } from '../../dist/components';
+import { Polyfea, PolyfeaContext } from '.';
 
 globalThis.addEventListener('load', () => {
     Polyfea.initialize();
-
-    defineCustomElements();
+    PolyfeaContext.define();
 
     if (!document.body.hasAttribute('polyfea')) {
         document.body.setAttribute('polyfea', 'initialized');

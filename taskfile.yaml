@@ -1,0 +1,7 @@
+version: '3'
+
+tasks:
+  storybook:
+    cmds:
+      - npm run storybook
+    desc: Start Storybook in development mode
