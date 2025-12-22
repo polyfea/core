@@ -20,7 +20,7 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npm install @rolldown/binding-linux-x64-gnu
-      - run: npm run coverage
+      - run: npm run coverage.ci
       - run: npm run build 
       - run: npm test
   publish_package:

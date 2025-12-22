@@ -24,6 +24,10 @@ export default
           include: ['tests/**/*.spec.*'],
           environment: 'happy-dom',
           execArgv: ['--localstorage-file', path.resolve(os.tmpdir(), `vitest-${process.pid}.localstorage`)],
+          browser: {
+            enabled: true,
+            headless: true,
+          },
         },
       },
       {
