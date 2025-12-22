@@ -1,8 +1,10 @@
-import type { StorybookConfig } from "@storybook/web-components-vite";
-import { mergeConfig } from "vite";
 
-const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+import { mergeConfig } from "vite";
+import { defineMain } from '@storybook/web-components-vite/node';
+
+export default defineMain({
+ 
+  stories: [ "../tests/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     "@chromatic-com/storybook",
     "@storybook/addon-docs",
@@ -19,27 +21,14 @@ const config: StorybookConfig = {
     return mergeConfig(config, {
       server: {
         host: true,
-        port: 8006,
-
-        proxy: {
-          "/api/v1": {
-            target: "http://localhost",
-            changeOrigin: true,
-          },
-          "/api/cache/attributes": {
-            target: "http://localhost",
-            changeOrigin: true,
-          },
-          "/api/v1/ws": {
-            target: "ws://localhost",
-            ws: true,
-            changeOrigin: true,
-          },
+        port: 8007,
+        watch: {
+          usePolling: true,
+          interval: 1000,
         },
       },
 
     });
   },
-};
+});
 
-export default config;

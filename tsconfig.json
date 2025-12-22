@@ -27,6 +27,6 @@
       "vitest/globals",
     ],
   },
-  "include": ["src", "browser-test-setup.ts"],
+  "include": ["src", "browser-test-setup.ts", "tests"],
   "exclude": ["node_modules", "dist", "build", "coverage", "**/*stories.ts"]
 }

@@ -1,15 +1,28 @@
 
-import { afterEach, beforeEach, expect, test } from 'vitest'
-import * as FetchMock from 'fetch-mock';
-import { Configuration, FetchAPI, StaticConfig } from '@polyfea/browser-api';
+import { afterEach, beforeEach, beforeAll, afterAll, expect, test, assert } from 'vitest'
+import { Configuration,  PolyfeaApi, type StaticConfig } from '@polyfea/browser-api';
 
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 
 import { firstValueFrom } from 'rxjs';
-import { StaticBackend } from '../static-backend';
-import { assert } from 'console';
+import { StaticBackend } from '../src/static-backend';
+
 
 let expectedConfig: StaticConfig = {} as StaticConfig;
 
+const server = setupServer(
+  http.get('/ui/polyfea/static-config', () => {
+    return HttpResponse.json(expectedConfig);
+  }),
+  http.get('/polyfea/static-config', () => {
+    return HttpResponse.json(expectedConfig);
+  }),
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 beforeEach(() => {
     globalThis.localStorage.clear();
     globalThis.document.head.innerHTML = '';
@@ -89,12 +102,8 @@ beforeEach(() => {
     };
 });
 
-
 test('getContextArea: Context Area provided', async () => {
     // given
-    const fetchMock = FetchMock.sandbox();
-    fetchMock.get('http://localhost:8080/polyfea/static-config', expectedConfig);
-
     const w = (globalThis as unknown as Window);
     globalThis.location?.assign('http://localhost:8080/test-path');
 
@@ -103,8 +112,7 @@ test('getContextArea: Context Area provided', async () => {
     w.document.head.appendChild(baseHref);
 
     const config = new Configuration({
-        basePath: 'http://localhost:8080/polyfea',
-        fetchApi: fetchMock as unknown as FetchAPI
+        basePath: 'http://localhost:8080/polyfea'
     });
 
     // when
@@ -123,9 +131,6 @@ test('getContextArea: Context Area provided', async () => {
 
 test('getContextArea: Path value is relative to base href', async () => {
     // given
-    const fetchMock = FetchMock.sandbox();
-    fetchMock.get('http://localhost:8080/ui/polyfea/static-config', expectedConfig);
-
     const w = (globalThis as unknown as Window);
     globalThis.location?.assign('http://localhost:8080/ui/test-path');
     const baseHref = w.document.createElement('base');
@@ -133,8 +138,7 @@ test('getContextArea: Path value is relative to base href', async () => {
     w.document.head.appendChild(baseHref);
 
     const config = new Configuration({
-        basePath: 'http://localhost:8080/ui/polyfea',
-        fetchApi: fetchMock as unknown as FetchAPI
+        basePath: 'http://localhost:8080/ui/polyfea'
     });
 
     // when
@@ -154,9 +158,6 @@ test('getContextArea: Path value is relative to base href', async () => {
 
 test('getContextArea: Path value is relative to base href, when missing trailing slash', async () => {
     // given
-    const fetchMock = FetchMock.sandbox();
-    fetchMock.get('http://localhost:8080/ui/polyfea/static-config', expectedConfig);
-
     const w = (globalThis as unknown as Window);
     globalThis.location?.assign('http://localhost:8080/ui');
     const baseHref = w.document.createElement('base');
@@ -164,12 +165,12 @@ test('getContextArea: Path value is relative to base href, when missing trailing
     w.document.head.appendChild(baseHref);
 
     const config = new Configuration({
-        basePath: 'http://localhost:8080/ui/polyfea',
-        fetchApi: fetchMock as unknown as FetchAPI
+        basePath: 'http://localhost:8080/ui/polyfea'
     });
+    const api= new PolyfeaApi(config);
 
     // when
-    const sut = new StaticBackend(config);
+    const sut = new StaticBackend(api);
     const contextArea = await firstValueFrom(sut.getContextArea('test-root'));
 
     // then
@@ -182,3 +183,5 @@ test('getContextArea: Path value is relative to base href, when missing trailing
         });
     }
 });
+
+

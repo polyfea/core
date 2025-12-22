@@ -11,10 +11,7 @@ loader/
 log.txt
 *.sublime-project
 *.sublime-workspace
-
-.stencil/
 .idea/
-.vscode/
 .sass-cache/
 .versions/
 node_modules/
@@ -25,3 +22,6 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 .env
 *.tgz
+coverage/
+.task/
+.playwright-install/

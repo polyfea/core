@@ -1,6 +1,6 @@
 import { NEVER, Observable, concatWith, from, map } from "rxjs";
-import { PolyfeaBackend } from "./internal";
-import { Configuration, ContextArea, PolyfeaApi, StaticConfig } from "@polyfea/browser-api";
+import { type PolyfeaBackend } from "./internal";
+import { Configuration, type ContextArea, PolyfeaApi, type StaticConfig } from "@polyfea/browser-api";
 
 export class StaticBackend implements PolyfeaBackend {
     private spec$ = new Observable<StaticConfig>();
@@ -28,7 +28,7 @@ export class StaticBackend implements PolyfeaBackend {
         this.spec$ = from(polyfeaApi.getStaticConfig()).pipe(concatWith(NEVER));
     }
 
-    getContextArea(contextName: string): Observable<ContextArea> {
+    getContextArea(contextName: string): Observable<ContextArea>{
         let path = globalThis.location.pathname;
         // make path relative to document.baseURI
         if (globalThis.document.baseURI) {
@@ -44,12 +44,12 @@ export class StaticBackend implements PolyfeaBackend {
 
         return this.spec$.pipe(
             map(spec => {
-                for (let context of spec.contextAreas) {
-                    if (context.name === contextName && new RegExp(context.path).test(path)) {
-                        return { ...context.contextArea, microfrontends: { ...spec.microfrontends, ...context.contextArea.microfrontends } };
+                for (let context of spec.contextAreas || []) {
+                    if (context.name === contextName && (!context.path || new RegExp(context.path).test(path))) {
+                        return  { elements: [], ...context.contextArea, microfrontends: {  ...spec.microfrontends || {} , ...context.contextArea?.microfrontends || {} } };
                     }
                 }
-                return null;
+                return {elements: [], microfrontends: { ...{}, ...spec.microfrontends }} ;
             }));
     }
 }

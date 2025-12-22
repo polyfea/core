@@ -1,6 +1,6 @@
-import {  Observable, catchError, concatWith, defer, of, retry, switchMap, tap, throwError, timer } from "rxjs";
-import { PolyfeaBackend } from "./internal";
-import { ApiResponse, Configuration, ContextArea, PolyfeaApi } from "@polyfea/browser-api";
+import {  Observable, catchError, concatWith, defer, of, retry, switchMap, tap, timer } from "rxjs";
+import { type PolyfeaBackend } from "./internal";
+import { type ApiResponse, Configuration, type ContextArea, PolyfeaApi } from "@polyfea/browser-api";
 
 /** @internal implementation of dynamic fetching of context areas */
 export class FetchBackend implements PolyfeaBackend {
@@ -37,34 +37,32 @@ export class FetchBackend implements PolyfeaBackend {
         }
 
         const cached = localStorage.getItem(`polyfea-context[${contextName},${path}]`);
-
         const fetched = defer(() => this.api.getContextAreaRaw({ name: contextName, path }))
             .pipe(
-                switchMap((response: ApiResponse<ContextArea>) => {
-                    if (response.raw.ok) {
-                        return response.value();
-                    } else {
-                        return throwError(() => new Error(response.raw.statusText));
-                    }
-                }),
+                switchMap((response: ApiResponse<ContextArea>) =>  response.value()),
                 tap(context => {
                     if (context) {
                         localStorage.setItem(`polyfea-context[${contextName},${path}]`, JSON.stringify(context));
                     }
-                })
+                }),
             );
         if (cached) {
             const context = JSON.parse(cached) as ContextArea;
             return of(context).pipe(
                 concatWith(fetched),
                 catchError(( err ) => {
-                    console.warn(`Failed to fetch context area ${contextName} from ${path}, using cached version as the last known value`, err);
+                    console.warn(`[Polyfea] Failed to fetch context area ${contextName} from ${path}, using cached version as the last known value`, err);
                     return of(context);
                 }), 
             );
         } else {
+                const retriesCfg =document.head.querySelector(`meta[name="polyfea-backend-retries"]`)?.getAttribute("content") || "3";
+                const retries = parseInt(retriesCfg, 10) || 3;
+                const timerCfg =document.head.querySelector(`meta[name="polyfea-backend-retry-timer"]`)?.getAttribute("content") || "2000";
+                const timerMs = parseInt(timerCfg, 10) || 2000;
+
             return fetched.pipe(
-                retry({ count: 3, delay: (retryIx: number) =>timer((retryIx+1)* 2000) })
+                retry({ count: retries, delay: (retryIx: number) =>timer((retryIx+1)* timerMs) })
             );
         }
     }

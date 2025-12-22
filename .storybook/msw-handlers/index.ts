@@ -1,6 +1,6 @@
-export * from "./attribute-specifications";
-import { HandlerAttributeSpecification_SimpleList } from "./attribute-specifications";
+
+import { WelcomeTestStaticConfigHandler } from "./polyfea-config";
 
 export const globalHandlers = [
-  ...HandlerAttributeSpecification_SimpleList,
+  ...WelcomeTestStaticConfigHandler,
 ];

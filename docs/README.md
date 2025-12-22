@@ -1,4 +1,6 @@
-@polyfea/core / [Exports](modules.md)
+**@polyfea/core**
+
+***
 
 # Polyfea microfrontend core library and browser driver
 
@@ -12,9 +14,9 @@ npm install @polyfea/core
 
 ## Documentation
 
-- The [_polyfea-context_](src/components/polyfea-context/readme.md) element loads microfrontends into the document, _replacing_ itself (by `display: contents`) with the microfrontend's content.
+- The [_polyfea-context_](_media/polyfea-context.md) element loads microfrontends into the document, _replacing_ itself (by `display: contents`) with the microfrontend's content.
 - The [_Polyfea_](docs/classes/Polyfea.md) class is for advanced use cases, providing control over the loading of microfrontends and elements.
-- The [Navigation polyfill](docs/interfaces/Navigation.md) intercepts navigation events and enables programmatic navigation in browsers that don't yet support the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API).
+- The [Navigation polyfill](_media/Navigation.md) intercepts navigation events and enables programmatic navigation in browsers that don't yet support the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API). Deprecated for direct usage as most of modern browsers already support [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API)
 - The [href](https://github.com/polyfea/core/blob/main/docs/modules.md#href) function helps with navigation in the single page application.
 
 ## Usage
@@ -117,7 +119,7 @@ You can influence the behavior of the package by setting the `<meta>` tags in th
 |----------------------------- | ------- | ----------- |
 | polyfea.backend              | ./polyfea | Specifies the API URL for retrieving information about configured context areas. If preceded with `static://`, then the `static-config` API path is called at module load instead of calling `context-area` queries for each context area. |
 | polyfea.cyclic-context-areas | error   | Determines behavior when cyclic nested context areas are used to avoid infinite recursion. Possible values are `error` (displays an error in the document flow), `silent` (provides no output), and `allow` (allows areas recursion). |
-| polyfea.cyclic-context-message|         | Error message to show if context area name recursion is detected. |
+| polyfea.context-verbosity| error         | Value of `silent`|`verbose`|`error` indicating how polyfea-context logs the activity and loading issues. |
 | csp-none                    |         | Nonce to use for dynamically inserted scripts and styles. This nonce must match the nonce used in the [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_Security_Policy) header. This method is safe, as scripts must be secured before being able to read the DOM. |
 | polyfea.duplicit-custom-elements | warn | Behavior when duplicate custom elements are registered at [`window.customElements`](https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements). Possible values are `silent`, `verbose`, `warn`, and `error`. |
 
@@ -127,9 +129,8 @@ To begin development on this package, follow these steps:
 
 1. Clone the repository to your local machine.
 2. Run `npm install` to install the necessary dependencies.
-3. Execute `npm run start` to start the development server.
-4. Adapt the `src/index.html` file to meet the specific requirements of your development task.
+3. Execute `npm run storybook` to start the Storybook server.
 
 With these steps, you can easily set up your development environment and make changes to the package as needed.
 
-Run `npm run build` before commiting to ensure up-to-date documentation in the repository.
+Run `npm run build` before commiting to ensure up-to-date documentation in the repository. Alternatively you may use [taskfile](https://taskfile.dev/) runner with some efficiency improvements for regular development
