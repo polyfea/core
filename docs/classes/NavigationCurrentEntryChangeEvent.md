@@ -1,453 +1,380 @@
-[@polyfea/core](../README.md) / [Exports](../modules.md) / NavigationCurrentEntryChangeEvent
+[**@polyfea/core**](../README.md)
+
+***
+
+[@polyfea/core](../globals.md) / NavigationCurrentEntryChangeEvent
 
 # Class: NavigationCurrentEntryChangeEvent
 
+Defined in: [src/navigation.ts:195](https://github.com/polyfea/core/blob/main/src/navigation.ts#L195)
+
 (@see https://developer.mozilla.org/en-US/docs/Web/API/NavigationCurrentEntryChangeEvent )
 
-## Hierarchy
+## Extends
 
 - `Event`
 
-  ↳ **`NavigationCurrentEntryChangeEvent`**
-
-## Table of contents
-
-### Constructors
-
-- [constructor](NavigationCurrentEntryChangeEvent.md#constructor)
-
-### Properties
-
-- [AT\_TARGET](NavigationCurrentEntryChangeEvent.md#at_target)
-- [BUBBLING\_PHASE](NavigationCurrentEntryChangeEvent.md#bubbling_phase)
-- [CAPTURING\_PHASE](NavigationCurrentEntryChangeEvent.md#capturing_phase)
-- [NONE](NavigationCurrentEntryChangeEvent.md#none)
-- [bubbles](NavigationCurrentEntryChangeEvent.md#bubbles)
-- [cancelBubble](NavigationCurrentEntryChangeEvent.md#cancelbubble)
-- [cancelable](NavigationCurrentEntryChangeEvent.md#cancelable)
-- [composed](NavigationCurrentEntryChangeEvent.md#composed)
-- [currentTarget](NavigationCurrentEntryChangeEvent.md#currenttarget)
-- [defaultPrevented](NavigationCurrentEntryChangeEvent.md#defaultprevented)
-- [eventPhase](NavigationCurrentEntryChangeEvent.md#eventphase)
-- [from](NavigationCurrentEntryChangeEvent.md#from)
-- [isTrusted](NavigationCurrentEntryChangeEvent.md#istrusted)
-- [navigationType](NavigationCurrentEntryChangeEvent.md#navigationtype)
-- [returnValue](NavigationCurrentEntryChangeEvent.md#returnvalue)
-- [srcElement](NavigationCurrentEntryChangeEvent.md#srcelement)
-- [target](NavigationCurrentEntryChangeEvent.md#target)
-- [timeStamp](NavigationCurrentEntryChangeEvent.md#timestamp)
-- [type](NavigationCurrentEntryChangeEvent.md#type)
-- [AT\_TARGET](NavigationCurrentEntryChangeEvent.md#at_target-1)
-- [BUBBLING\_PHASE](NavigationCurrentEntryChangeEvent.md#bubbling_phase-1)
-- [CAPTURING\_PHASE](NavigationCurrentEntryChangeEvent.md#capturing_phase-1)
-- [NONE](NavigationCurrentEntryChangeEvent.md#none-1)
-
-### Methods
-
-- [composedPath](NavigationCurrentEntryChangeEvent.md#composedpath)
-- [initEvent](NavigationCurrentEntryChangeEvent.md#initevent)
-- [preventDefault](NavigationCurrentEntryChangeEvent.md#preventdefault)
-- [stopImmediatePropagation](NavigationCurrentEntryChangeEvent.md#stopimmediatepropagation)
-- [stopPropagation](NavigationCurrentEntryChangeEvent.md#stoppropagation)
-
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new NavigationCurrentEntryChangeEvent**(`navigationType`, `from`): [`NavigationCurrentEntryChangeEvent`](NavigationCurrentEntryChangeEvent.md)
+> **new NavigationCurrentEntryChangeEvent**(`navigationType`, `from`): `NavigationCurrentEntryChangeEvent`
+
+Defined in: [src/navigation.ts:198](https://github.com/polyfea/core/blob/main/src/navigation.ts#L198)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `navigationType` | `TransitionMode` |
-| `from` | [`NavigationHistoryEntry`](../interfaces/NavigationHistoryEntry.md) |
+##### navigationType
+
+`TransitionMode`
+
+##### from
+
+[`NavigationHistoryEntry`](../interfaces/NavigationHistoryEntry.md)
 
 #### Returns
 
-[`NavigationCurrentEntryChangeEvent`](NavigationCurrentEntryChangeEvent.md)
+`NavigationCurrentEntryChangeEvent`
 
 #### Overrides
 
-Event.constructor
-
-#### Defined in
-
-[src/core/navigation.ts:183](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L183)
+`Event.constructor`
 
 ## Properties
 
 ### AT\_TARGET
 
-• `Readonly` **AT\_TARGET**: ``2``
+> `readonly` **AT\_TARGET**: `2`
+
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11462
 
 #### Inherited from
 
-Event.AT\_TARGET
+`Event.AT_TARGET`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8100
-
-___
-
-### BUBBLING\_PHASE
-
-• `Readonly` **BUBBLING\_PHASE**: ``3``
-
-#### Inherited from
-
-Event.BUBBLING\_PHASE
-
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8101
-
-___
-
-### CAPTURING\_PHASE
-
-• `Readonly` **CAPTURING\_PHASE**: ``1``
-
-#### Inherited from
-
-Event.CAPTURING\_PHASE
-
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8099
-
-___
-
-### NONE
-
-• `Readonly` **NONE**: ``0``
-
-#### Inherited from
-
-Event.NONE
-
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8098
-
-___
+***
 
 ### bubbles
 
-• `Readonly` **bubbles**: `boolean`
+> `readonly` **bubbles**: `boolean`
 
-Returns true or false depending on how event was initialized. True if event goes through its target's ancestors in reverse tree order, and false otherwise.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11353
+
+The **`bubbles`** read-only property of the Event interface indicates whether the event bubbles up through the DOM tree or not.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/bubbles)
 
 #### Inherited from
 
-Event.bubbles
+`Event.bubbles`
 
-#### Defined in
+***
 
-node_modules/typescript/lib/lib.dom.d.ts:7995
+### BUBBLING\_PHASE
 
-___
+> `readonly` **BUBBLING\_PHASE**: `3`
 
-### cancelBubble
-
-• **cancelBubble**: `boolean`
-
-**`Deprecated`**
-
-[MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/cancelBubble)
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11463
 
 #### Inherited from
 
-Event.cancelBubble
+`Event.BUBBLING_PHASE`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8001
-
-___
+***
 
 ### cancelable
 
-• `Readonly` **cancelable**: `boolean`
+> `readonly` **cancelable**: `boolean`
 
-Returns true or false depending on how event was initialized. Its return value does not always carry meaning, but true can indicate that part of the operation during which event was dispatched, can be canceled by invoking the preventDefault() method.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11366
+
+The **`cancelable`** read-only property of the Event interface indicates whether the event can be canceled, and therefore prevented as if the event never happened.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/cancelable)
 
 #### Inherited from
 
-Event.cancelable
+`Event.cancelable`
 
-#### Defined in
+***
 
-node_modules/typescript/lib/lib.dom.d.ts:8007
+### ~~cancelBubble~~
 
-___
+> **cancelBubble**: `boolean`
+
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11360
+
+The **`cancelBubble`** property of the Event interface is deprecated.
+
+#### Deprecated
+
+[MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/cancelBubble)
+
+#### Inherited from
+
+`Event.cancelBubble`
+
+***
+
+### CAPTURING\_PHASE
+
+> `readonly` **CAPTURING\_PHASE**: `1`
+
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11461
+
+#### Inherited from
+
+`Event.CAPTURING_PHASE`
+
+***
 
 ### composed
 
-• `Readonly` **composed**: `boolean`
+> `readonly` **composed**: `boolean`
 
-Returns true or false depending on how event was initialized. True if event invokes listeners past a ShadowRoot node that is the root of its target, and false otherwise.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11372
+
+The read-only **`composed`** property of the or not the event will propagate across the shadow DOM boundary into the standard DOM.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/composed)
 
 #### Inherited from
 
-Event.composed
+`Event.composed`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8013
-
-___
+***
 
 ### currentTarget
 
-• `Readonly` **currentTarget**: `EventTarget`
+> `readonly` **currentTarget**: `EventTarget` \| `null`
 
-Returns the object whose event listener's callback is currently being invoked.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11378
+
+The **`currentTarget`** read-only property of the Event interface identifies the element to which the event handler has been attached.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/currentTarget)
 
 #### Inherited from
 
-Event.currentTarget
+`Event.currentTarget`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8019
-
-___
+***
 
 ### defaultPrevented
 
-• `Readonly` **defaultPrevented**: `boolean`
+> `readonly` **defaultPrevented**: `boolean`
 
-Returns true if preventDefault() was invoked successfully to indicate cancelation, and false otherwise.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11384
+
+The **`defaultPrevented`** read-only property of the Event interface returns a boolean value indicating whether or not the call to Event.preventDefault() canceled the event.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/defaultPrevented)
 
 #### Inherited from
 
-Event.defaultPrevented
+`Event.defaultPrevented`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8025
-
-___
+***
 
 ### eventPhase
 
-• `Readonly` **eventPhase**: `number`
+> `readonly` **eventPhase**: `number`
 
-Returns the event's phase, which is one of NONE, CAPTURING_PHASE, AT_TARGET, and BUBBLING_PHASE.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11390
+
+The **`eventPhase`** read-only property of the being evaluated.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/eventPhase)
 
 #### Inherited from
 
-Event.eventPhase
+`Event.eventPhase`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8031
-
-___
+***
 
 ### from
 
-• `Readonly` **from**: [`NavigationHistoryEntry`](../interfaces/NavigationHistoryEntry.md)
+> `readonly` **from**: [`NavigationHistoryEntry`](../interfaces/NavigationHistoryEntry.md)
 
-#### Defined in
+Defined in: [src/navigation.ts:197](https://github.com/polyfea/core/blob/main/src/navigation.ts#L197)
 
-[src/core/navigation.ts:185](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L185)
-
-___
+***
 
 ### isTrusted
 
-• `Readonly` **isTrusted**: `boolean`
+> `readonly` **isTrusted**: `boolean`
 
-Returns true if event was dispatched by the user agent, and false otherwise.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11396
+
+The **`isTrusted`** read-only property of the when the event was generated by the user agent (including via user actions and programmatic methods such as HTMLElement.focus()), and `false` when the event was dispatched via The only exception is the `click` event, which initializes the `isTrusted` property to `false` in user agents.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/isTrusted)
 
 #### Inherited from
 
-Event.isTrusted
+`Event.isTrusted`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8037
-
-___
+***
 
 ### navigationType
 
-• `Readonly` **navigationType**: `TransitionMode`
+> `readonly` **navigationType**: `TransitionMode`
 
-#### Defined in
+Defined in: [src/navigation.ts:196](https://github.com/polyfea/core/blob/main/src/navigation.ts#L196)
 
-[src/core/navigation.ts:184](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L184)
+***
 
-___
+### NONE
 
-### returnValue
+> `readonly` **NONE**: `0`
 
-• **returnValue**: `boolean`
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11460
 
-**`Deprecated`**
+#### Inherited from
+
+`Event.NONE`
+
+***
+
+### ~~returnValue~~
+
+> **returnValue**: `boolean`
+
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11403
+
+The Event property **`returnValue`** indicates whether the default action for this event has been prevented or not.
+
+#### Deprecated
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/returnValue)
 
 #### Inherited from
 
-Event.returnValue
+`Event.returnValue`
 
-#### Defined in
+***
 
-node_modules/typescript/lib/lib.dom.d.ts:8043
+### ~~srcElement~~
 
-___
+> `readonly` **srcElement**: `EventTarget` \| `null`
 
-### srcElement
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11410
 
-• `Readonly` **srcElement**: `EventTarget`
+The deprecated **`Event.srcElement`** is an alias for the Event.target property.
 
-**`Deprecated`**
+#### Deprecated
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/srcElement)
 
 #### Inherited from
 
-Event.srcElement
+`Event.srcElement`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8049
-
-___
+***
 
 ### target
 
-• `Readonly` **target**: `EventTarget`
+> `readonly` **target**: `EventTarget` \| `null`
 
-Returns the object to which event is dispatched (its target).
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11416
+
+The read-only **`target`** property of the dispatched.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/target)
 
 #### Inherited from
 
-Event.target
+`Event.target`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8055
-
-___
+***
 
 ### timeStamp
 
-• `Readonly` **timeStamp**: `number`
+> `readonly` **timeStamp**: `number`
 
-Returns the event's timestamp as the number of milliseconds measured relative to the time origin.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11422
+
+The **`timeStamp`** read-only property of the Event interface returns the time (in milliseconds) at which the event was created.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/timeStamp)
 
 #### Inherited from
 
-Event.timeStamp
+`Event.timeStamp`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8061
-
-___
+***
 
 ### type
 
-• `Readonly` **type**: `string`
+> `readonly` **type**: `string`
 
-Returns the type of event, e.g. "click", "hashchange", or "submit".
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11428
+
+The **`type`** read-only property of the Event interface returns a string containing the event's type.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/type)
 
 #### Inherited from
 
-Event.type
+`Event.type`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8067
-
-___
+***
 
 ### AT\_TARGET
 
-▪ `Static` `Readonly` **AT\_TARGET**: ``2``
+> `readonly` `static` **AT\_TARGET**: `2`
+
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11471
 
 #### Inherited from
 
-Event.AT\_TARGET
+`Event.AT_TARGET`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8109
-
-___
+***
 
 ### BUBBLING\_PHASE
 
-▪ `Static` `Readonly` **BUBBLING\_PHASE**: ``3``
+> `readonly` `static` **BUBBLING\_PHASE**: `3`
+
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11472
 
 #### Inherited from
 
-Event.BUBBLING\_PHASE
+`Event.BUBBLING_PHASE`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8110
-
-___
+***
 
 ### CAPTURING\_PHASE
 
-▪ `Static` `Readonly` **CAPTURING\_PHASE**: ``1``
+> `readonly` `static` **CAPTURING\_PHASE**: `1`
+
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11470
 
 #### Inherited from
 
-Event.CAPTURING\_PHASE
+`Event.CAPTURING_PHASE`
 
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8108
-
-___
+***
 
 ### NONE
 
-▪ `Static` `Readonly` **NONE**: ``0``
+> `readonly` `static` **NONE**: `0`
+
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11469
 
 #### Inherited from
 
-Event.NONE
-
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8107
+`Event.NONE`
 
 ## Methods
 
-### composedPath
+### composedPath()
 
-▸ **composedPath**(): `EventTarget`[]
+> **composedPath**(): `EventTarget`[]
 
-Returns the invocation target objects of event's path (objects on which listeners will be invoked), except for any nodes in shadow trees of which the shadow root's mode is "closed" that are not reachable from event's currentTarget.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11434
+
+The **`composedPath()`** method of the Event interface returns the event's path which is an array of the objects on which listeners will be invoked.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/composedPath)
 
@@ -457,49 +384,53 @@ Returns the invocation target objects of event's path (objects on which listener
 
 #### Inherited from
 
-Event.composedPath
+`Event.composedPath`
 
-#### Defined in
+***
 
-node_modules/typescript/lib/lib.dom.d.ts:8073
+### ~~initEvent()~~
 
-___
+> **initEvent**(`type`, `bubbles?`, `cancelable?`): `void`
 
-### initEvent
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11441
 
-▸ **initEvent**(`type`, `bubbles?`, `cancelable?`): `void`
+The **`Event.initEvent()`** method is used to initialize the value of an event created using Document.createEvent().
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `bubbles?` | `boolean` |
-| `cancelable?` | `boolean` |
+##### type
+
+`string`
+
+##### bubbles?
+
+`boolean`
+
+##### cancelable?
+
+`boolean`
 
 #### Returns
 
 `void`
 
-**`Deprecated`**
+#### Deprecated
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/initEvent)
 
 #### Inherited from
 
-Event.initEvent
+`Event.initEvent`
 
-#### Defined in
+***
 
-node_modules/typescript/lib/lib.dom.d.ts:8079
+### preventDefault()
 
-___
+> **preventDefault**(): `void`
 
-### preventDefault
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11447
 
-▸ **preventDefault**(): `void`
-
-If invoked when the cancelable attribute value is true, and while executing a listener for the event with passive set to false, signals to the operation that caused event to be dispatched that it needs to be canceled.
+The **`preventDefault()`** method of the Event interface tells the user agent that if the event does not get explicitly handled, its default action should not be taken as it normally would be.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/preventDefault)
 
@@ -509,19 +440,17 @@ If invoked when the cancelable attribute value is true, and while executing a li
 
 #### Inherited from
 
-Event.preventDefault
+`Event.preventDefault`
 
-#### Defined in
+***
 
-node_modules/typescript/lib/lib.dom.d.ts:8085
+### stopImmediatePropagation()
 
-___
+> **stopImmediatePropagation**(): `void`
 
-### stopImmediatePropagation
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11453
 
-▸ **stopImmediatePropagation**(): `void`
-
-Invoking this method prevents event from reaching any registered event listeners after the current one finishes running and, when dispatched in a tree, also prevents event from reaching any other objects.
+The **`stopImmediatePropagation()`** method of the If several listeners are attached to the same element for the same event type, they are called in the order in which they were added.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/stopImmediatePropagation)
 
@@ -531,19 +460,17 @@ Invoking this method prevents event from reaching any registered event listeners
 
 #### Inherited from
 
-Event.stopImmediatePropagation
+`Event.stopImmediatePropagation`
 
-#### Defined in
+***
 
-node_modules/typescript/lib/lib.dom.d.ts:8091
+### stopPropagation()
 
-___
+> **stopPropagation**(): `void`
 
-### stopPropagation
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11459
 
-▸ **stopPropagation**(): `void`
-
-When dispatched in a tree, invoking this method prevents event from reaching any objects other than the current object.
+The **`stopPropagation()`** method of the Event interface prevents further propagation of the current event in the capturing and bubbling phases.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/stopPropagation)
 
@@ -553,8 +480,4 @@ When dispatched in a tree, invoking this method prevents event from reaching any
 
 #### Inherited from
 
-Event.stopPropagation
-
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8097
+`Event.stopPropagation`

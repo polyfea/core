@@ -1,43 +1,35 @@
-[@polyfea/core](../README.md) / [Exports](../modules.md) / NavigationTransistion
+[**@polyfea/core**](../README.md)
+
+***
+
+[@polyfea/core](../globals.md) / NavigationTransistion
 
 # Interface: NavigationTransistion
 
+Defined in: [src/navigation.ts:219](https://github.com/polyfea/core/blob/main/src/navigation.ts#L219)
+
 (@see https://developer.mozilla.org/en-US/docs/Web/API/NavigationTransition )
-
-## Table of contents
-
-### Properties
-
-- [finished](NavigationTransistion.md#finished)
-- [from](NavigationTransistion.md#from)
-- [type](NavigationTransistion.md#type)
 
 ## Properties
 
 ### finished
 
-• **finished**: `Promise`\<`void`\>
+> **finished**: `Promise`\<`void`\>
 
-#### Defined in
+Defined in: [src/navigation.ts:220](https://github.com/polyfea/core/blob/main/src/navigation.ts#L220)
 
-[src/core/navigation.ts:206](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L206)
-
-___
+***
 
 ### from
 
-• **from**: [`NavigationHistoryEntry`](NavigationHistoryEntry.md)
+> **from**: [`NavigationHistoryEntry`](NavigationHistoryEntry.md)
 
-#### Defined in
+Defined in: [src/navigation.ts:221](https://github.com/polyfea/core/blob/main/src/navigation.ts#L221)
 
-[src/core/navigation.ts:207](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L207)
+***
 
-___
+### navigationType
 
-### type
+> **navigationType**: `TransitionMode`
 
-• **type**: `TransitionMode`
-
-#### Defined in
-
-[src/core/navigation.ts:208](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L208)
+Defined in: [src/navigation.ts:222](https://github.com/polyfea/core/blob/main/src/navigation.ts#L222)

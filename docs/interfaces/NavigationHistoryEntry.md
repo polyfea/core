@@ -1,111 +1,84 @@
-[@polyfea/core](../README.md) / [Exports](../modules.md) / NavigationHistoryEntry
+[**@polyfea/core**](../README.md)
+
+***
+
+[@polyfea/core](../globals.md) / NavigationHistoryEntry
 
 # Interface: NavigationHistoryEntry
 
+Defined in: [src/navigation.ts:206](https://github.com/polyfea/core/blob/main/src/navigation.ts#L206)
+
 (@see https://developer.mozilla.org/en-US/docs/Web/API/NavigationHistoryEntry )
 
-## Hierarchy
+## Extends
 
 - `EventTarget`
-
-  ↳ **`NavigationHistoryEntry`**
-
-## Table of contents
-
-### Properties
-
-- [id](NavigationHistoryEntry.md#id)
-- [index](NavigationHistoryEntry.md#index)
-- [key](NavigationHistoryEntry.md#key)
-- [sameDocument](NavigationHistoryEntry.md#samedocument)
-- [url](NavigationHistoryEntry.md#url)
-
-### Methods
-
-- [addEventListener](NavigationHistoryEntry.md#addeventlistener)
-- [dispatchEvent](NavigationHistoryEntry.md#dispatchevent)
-- [getState](NavigationHistoryEntry.md#getstate)
-- [removeEventListener](NavigationHistoryEntry.md#removeeventlistener)
 
 ## Properties
 
 ### id
 
-• **id**: `string`
+> **id**: `string`
 
-#### Defined in
+Defined in: [src/navigation.ts:207](https://github.com/polyfea/core/blob/main/src/navigation.ts#L207)
 
-[src/core/navigation.ts:192](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L192)
-
-___
+***
 
 ### index
 
-• **index**: `number`
+> **index**: `number`
 
-#### Defined in
+Defined in: [src/navigation.ts:208](https://github.com/polyfea/core/blob/main/src/navigation.ts#L208)
 
-[src/core/navigation.ts:193](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L193)
-
-___
+***
 
 ### key
 
-• **key**: `string`
+> **key**: `string`
 
-#### Defined in
+Defined in: [src/navigation.ts:209](https://github.com/polyfea/core/blob/main/src/navigation.ts#L209)
 
-[src/core/navigation.ts:194](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L194)
-
-___
+***
 
 ### sameDocument
 
-• **sameDocument**: `boolean`
+> **sameDocument**: `boolean`
 
-#### Defined in
+Defined in: [src/navigation.ts:210](https://github.com/polyfea/core/blob/main/src/navigation.ts#L210)
 
-[src/core/navigation.ts:195](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L195)
-
-___
+***
 
 ### url
 
-• **url**: `string`
+> **url**: `string`
 
-#### Defined in
-
-[src/core/navigation.ts:196](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L196)
+Defined in: [src/navigation.ts:211](https://github.com/polyfea/core/blob/main/src/navigation.ts#L211)
 
 ## Methods
 
-### addEventListener
+### addEventListener()
 
-▸ **addEventListener**(`type`, `callback`, `options?`): `void`
+> **addEventListener**(`type`, `callback`, `options?`): `void`
 
-Appends an event listener for events whose type attribute value is type. The callback argument sets the callback that will be invoked when the event is dispatched.
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11569
 
-The options argument sets listener-specific options. For compatibility this can be a boolean, in which case the method behaves exactly as if the value was specified as options's capture.
-
-When set to true, options's capture prevents callback from being invoked when the event's eventPhase attribute value is BUBBLING_PHASE. When false (or not present), callback will not be invoked when event's eventPhase attribute value is CAPTURING_PHASE. Either way, callback will be invoked if event's eventPhase attribute value is AT_TARGET.
-
-When set to true, options's passive indicates that the callback will not cancel the event by invoking preventDefault(). This is used to enable performance optimizations described in § 2.8 Observing event listeners.
-
-When set to true, options's once indicates that the callback will only be invoked once after which the event listener will be removed.
-
-If an AbortSignal is passed for options's signal, then the event listener will be removed when signal is aborted.
-
-The event listener is appended to target's event listener list and is not appended if it has the same type, callback, and capture.
+The **`addEventListener()`** method of the EventTarget interface sets up a function that will be called whenever the specified event is delivered to the target.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `callback` | `EventListenerOrEventListenerObject` |
-| `options?` | `boolean` \| `AddEventListenerOptions` |
+##### type
+
+`string`
+
+##### callback
+
+`EventListenerOrEventListenerObject` | `null`
+
+##### options?
+
+`boolean` | `AddEventListenerOptions`
 
 #### Returns
 
@@ -113,27 +86,25 @@ The event listener is appended to target's event listener list and is not append
 
 #### Inherited from
 
-EventTarget.addEventListener
+`EventTarget.addEventListener`
 
-#### Defined in
+***
 
-node_modules/typescript/lib/lib.dom.d.ts:8211
+### dispatchEvent()
 
-___
+> **dispatchEvent**(`event`): `boolean`
 
-### dispatchEvent
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11575
 
-▸ **dispatchEvent**(`event`): `boolean`
-
-Dispatches a synthetic event event to target and returns true if either event's cancelable attribute value is false or its preventDefault() method was not invoked, and false otherwise.
+The **`dispatchEvent()`** method of the EventTarget sends an Event to the object, (synchronously) invoking the affected event listeners in the appropriate order.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventTarget/dispatchEvent)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `Event` |
+##### event
+
+`Event`
 
 #### Returns
 
@@ -141,43 +112,45 @@ Dispatches a synthetic event event to target and returns true if either event's 
 
 #### Inherited from
 
-EventTarget.dispatchEvent
+`EventTarget.dispatchEvent`
 
-#### Defined in
+***
 
-node_modules/typescript/lib/lib.dom.d.ts:8217
+### getState()
 
-___
+> **getState**(): `any`
 
-### getState
-
-▸ **getState**(): `any`
+Defined in: [src/navigation.ts:213](https://github.com/polyfea/core/blob/main/src/navigation.ts#L213)
 
 #### Returns
 
 `any`
 
-#### Defined in
+***
 
-[src/core/navigation.ts:198](https://github.com/polyfea/core/blob/main/src/core/navigation.ts#L198)
+### removeEventListener()
 
-___
+> **removeEventListener**(`type`, `callback`, `options?`): `void`
 
-### removeEventListener
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11581
 
-▸ **removeEventListener**(`type`, `callback`, `options?`): `void`
-
-Removes the event listener in target's event listener list with the same type, callback, and options.
+The **`removeEventListener()`** method of the EventTarget interface removes an event listener previously registered with EventTarget.addEventListener() from the target.
 
 [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventTarget/removeEventListener)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `callback` | `EventListenerOrEventListenerObject` |
-| `options?` | `boolean` \| `EventListenerOptions` |
+##### type
+
+`string`
+
+##### callback
+
+`EventListenerOrEventListenerObject` | `null`
+
+##### options?
+
+`boolean` | `EventListenerOptions`
 
 #### Returns
 
@@ -185,8 +158,4 @@ Removes the event listener in target's event listener list with the same type, c
 
 #### Inherited from
 
-EventTarget.removeEventListener
-
-#### Defined in
-
-node_modules/typescript/lib/lib.dom.d.ts:8223
+`EventTarget.removeEventListener`

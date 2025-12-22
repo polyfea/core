@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/polyfea-context.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "PolyfeaContext",
+          "slots": [
+            {
+              "description": "The slotted content is displayed if the context area  has no elements.",
+              "name": ""
+            },
+            {
+              "description": "This slot is present if an error occurs during context area retrieval or loading of dependencies, together with setting error attribute on the polyfea-context element",
+              "name": "error"
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "description": "Defines the custom element 'polyfea-context' if not already defined *"
+            },
+            {
+              "kind": "field",
+              "name": "VERBOSITY_SILENT",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "readonly": true,
+              "default": "'silent'",
+              "description": "Verbosity level silent"
+            },
+            {
+              "kind": "field",
+              "name": "VERBOSITY_ERROR",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "readonly": true,
+              "default": "'error'",
+              "description": "Verbosity level error"
+            },
+            {
+              "kind": "field",
+              "name": "VERBOSITY_VERBOSE",
+              "type": {
+                "text": "string"
+              },
+              "static": true,
+              "readonly": true,
+              "default": "'verbose'",
+              "description": "Verbosity level verbose"
+            },
+            {
+              "kind": "field",
+              "name": "contextName",
+              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\nThe property `context-name` takes priority if it is set",
+              "attribute": "context-name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\nThe property `context-name` takes priority if it is set",
+              "attribute": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "take",
+              "type": {
+                "text": "number"
+              },
+              "description": "Specifies the number of context area elements to render.\nIf this property is unset or has a non-positive value, all configured\nelements will be rendered.",
+              "attribute": "take"
+            },
+            {
+              "kind": "field",
+              "name": "extraAttributes",
+              "type": {
+                "text": "{ [key: string]: string }"
+              },
+              "description": "Defines additional attributes to be set on the rendered elements.",
+              "attribute": "extra-attributes"
+            },
+            {
+              "kind": "field",
+              "name": "extraStyle",
+              "description": "Additional style properties to be set on the rendered elements.",
+              "attribute": "extra-style",
+              "type": {
+                "text": "{ [key: string]: string | number }"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "verbosity",
+              "type": {
+                "text": "string"
+              },
+              "description": "The verbosity level of the component.\n\n- `silent`: No logs or warnings are produced.\n- `error`: Only warnings about errors during context area loading are produced. This is the default level.\n- `verbose`: Detailed logs about context area loading and microfrontend loading are produced.\n\nThe verbosity level can also be set globally using a meta tag in the document head:\n`<meta name=\"polyfea.context-verbosity\" content=\"silent|error|verbose\">`",
+              "attribute": "verbosity"
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string | null"
+              },
+              "description": "If an error occurs during context area retrieval or loading of dependencies,\nthis attribute is set with the error message. Otherwise, it is null.",
+              "readonly": true,
+              "attribute": "error"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "context-name",
+              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\nThe property `context-name` takes priority if it is set",
+              "fieldName": "contextName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\nThe property `context-name` takes priority if it is set",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "take",
+              "type": {
+                "text": "number"
+              },
+              "description": "Specifies the number of context area elements to render.\nIf this property is unset or has a non-positive value, all configured\nelements will be rendered.",
+              "fieldName": "take"
+            },
+            {
+              "name": "extra-attributes",
+              "type": {
+                "text": "{ [key: string]: string }"
+              },
+              "description": "Defines additional attributes to be set on the rendered elements.",
+              "fieldName": "extraAttributes"
+            },
+            {
+              "name": "extra-style",
+              "description": "Additional style properties to be set on the rendered elements.",
+              "fieldName": "extraStyle",
+              "type": {
+                "text": "{ [key: string]: string | number }"
+              }
+            },
+            {
+              "name": "verbosity",
+              "type": {
+                "text": "string"
+              },
+              "description": "The verbosity level of the component.\n\n- `silent`: No logs or warnings are produced.\n- `error`: Only warnings about errors during context area loading are produced. This is the default level.\n- `verbose`: Detailed logs about context area loading and microfrontend loading are produced.\n\nThe verbosity level can also be set globally using a meta tag in the document head:\n`<meta name=\"polyfea.context-verbosity\" content=\"silent|error|verbose\">`",
+              "fieldName": "verbosity"
+            },
+            {
+              "name": "error",
+              "type": {
+                "text": "string | null"
+              },
+              "description": "If an error occurs during context area retrieval or loading of dependencies,\nthis attribute is set with the error message. Otherwise, it is null.",
+              "readonly": true,
+              "fieldName": "error"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "polyfea-context",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PolyfeaContext",
+          "declaration": {
+            "name": "PolyfeaContext",
+            "module": "src/polyfea-context.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "polyfea-context",
+          "declaration": {
+            "name": "PolyfeaContext",
+            "module": "src/polyfea-context.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

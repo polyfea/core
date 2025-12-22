@@ -1,0 +1,23 @@
+<style>
+  /* Replace with the actual selector you found */
+  #storybook-docs {
+    height: 100%; /* Or 100vh if it's the root container and you want full viewport */
+    overflow: auto; /* Crucial for enabling scrollbars */
+    box-sizing: border-box; /* Good practice */
+  }
+
+  /* Another common container if #storybook-docs doesn't work */
+  .sbdocs-content {
+      height: 100%;
+      overflow: auto;
+      box-sizing: border-box;
+  }
+
+  /* If a very high-level wrapper is causing it, be more aggressive */
+  html, body, #root, #docs-root { /* Adjust these selectors based on your actual DOM */
+      height: 100%;
+      overflow: auto !important; /* Use !important with caution, but sometimes needed */
+  }
+</style>
+<meta name="polyfea.backend" content="static://"/>
+<base href="/" />

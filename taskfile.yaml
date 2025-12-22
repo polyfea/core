@@ -1,0 +1,75 @@
+version: '3'
+
+tasks:
+  storybook:
+    cmds:
+      - npm run storybook
+    desc: Start Storybook in development mode
+  coverage:
+    cmds:
+      - npx vitest run --coverage --browser.headless
+    desc: Generate test coverage report
+    deps:
+      - playwright-install
+  test:
+    cmds:
+      - npm run test
+    desc: Run unit tests
+  playwright-install:
+    desc: Install Playwright browsers
+    cmds:
+      - npx playwright install --with-deps
+      - touch .playwright-installed
+    sources:
+      - package-lock.json
+    generates:
+      - .playwright-installed
+  cem: 
+    cmds:
+      - npm run cem
+    desc: Generate Custom Elements Manifest
+    generates:
+      - custom-elements.json
+    sources:
+      - src/polyfea-context.ts
+  cem-doc:
+    deps:
+      - cem
+    cmds:
+      - npm run cem-doc
+    desc: Generate CEM documentation in Markdown
+    generates:
+      - polyfea-context.md
+    sources:
+      - custom-elements.json
+  typedoc:
+    cmds:
+      - npm run typedoc
+    desc: Generate TypeDoc documentation in Markdown
+    sources:
+      - src/**/*.ts
+  build.index:
+    cmds:
+      - npm run build.index
+    desc: Build the project
+    generates:
+      - dist/index.mjs
+    sources:
+      - src/**/*.ts
+  build.boot:
+    cmds:
+      - npm run build.boot
+    desc: Build the project
+    generates:
+      - dist/boot.mjs
+    sources:
+      - src/**/*.ts
+  all:
+    deps:
+      - coverage
+      - build.index
+      - build.boot
+      - cem-doc
+      - typedoc
+    desc: Build all artifacts
+    cmds: []
