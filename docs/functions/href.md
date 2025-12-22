@@ -8,7 +8,7 @@
 
 > **href**(`url`): `object`
 
-Defined in: src/href.ts:32
+Defined in: [src/href.ts:32](https://github.com/polyfea/core/blob/main/src/href.ts#L32)
 
 The `href` function can be used to augment anchor elements to programmatically invoke Navigation.navigate.
 It returns an object with a `href` property and an `onclick` event handler.
