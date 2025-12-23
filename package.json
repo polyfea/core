@@ -64,6 +64,7 @@
     "react": "^19.2.3",
     "shadow-dom-testing-library": "^1.13.1",
     "storybook": "^10.1.10",
+    "terser": "^5.44.1",
     "typedoc": "^0.28.15",
     "typedoc-plugin-markdown": "^4.9.0",
     "typescript": "~5.9.3",

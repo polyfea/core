@@ -19,7 +19,8 @@ tasks:
     desc: Install Playwright browsers
     cmds:
       - npx playwright install --with-deps
-      - touch .playwright-installed
+      - cmd: echo "" > .playwright-installed
+        silent: true
     sources:
       - package-lock.json
     generates:
@@ -56,6 +57,7 @@ tasks:
       - dist/index.mjs
     sources:
       - src/**/*.ts
+      - vite.index.ts
   build.boot:
     cmds:
       - npm run build.boot
@@ -64,6 +66,15 @@ tasks:
       - dist/boot.mjs
     sources:
       - src/**/*.ts
+      - vite.boot.ts
+  install:
+    desc: Install Package dependencies
+    cmds:
+      - npm install
+    sources:
+      - package.json
+    generates:
+      - package-lock.json
   all:
     deps:
       - coverage
