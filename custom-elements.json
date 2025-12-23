@@ -63,7 +63,7 @@
             {
               "kind": "field",
               "name": "contextName",
-              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\nThe property `context-name` takes priority if it is set",
+              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\r\nThe property `context-name` takes priority if it is set",
               "attribute": "context-name",
               "type": {
                 "text": "string"
@@ -72,7 +72,7 @@
             {
               "kind": "field",
               "name": "name",
-              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\nThe property `context-name` takes priority if it is set",
+              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\r\nThe property `context-name` takes priority if it is set",
               "attribute": "name",
               "type": {
                 "text": "string"
@@ -84,7 +84,7 @@
               "type": {
                 "text": "number"
               },
-              "description": "Specifies the number of context area elements to render.\nIf this property is unset or has a non-positive value, all configured\nelements will be rendered.",
+              "description": "Specifies the number of context area elements to render.\r\nIf this property is unset or has a non-positive value, all configured\r\nelements will be rendered.",
               "attribute": "take"
             },
             {
@@ -111,7 +111,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "The verbosity level of the component.\n\n- `silent`: No logs or warnings are produced.\n- `error`: Only warnings about errors during context area loading are produced. This is the default level.\n- `verbose`: Detailed logs about context area loading and microfrontend loading are produced.\n\nThe verbosity level can also be set globally using a meta tag in the document head:\n`<meta name=\"polyfea.context-verbosity\" content=\"silent|error|verbose\">`",
+              "description": "The verbosity level of the component.\r\n\r\n- `silent`: No logs or warnings are produced.\r\n- `error`: Only warnings about errors during context area loading are produced. This is the default level.\r\n- `verbose`: Detailed logs about context area loading and microfrontend loading are produced.\r\n\r\nThe verbosity level can also be set globally using a meta tag in the document head:\r\n`<meta name=\"polyfea.context-verbosity\" content=\"silent|error|verbose\">`",
               "attribute": "verbosity"
             },
             {
@@ -120,7 +120,7 @@
               "type": {
                 "text": "string | null"
               },
-              "description": "If an error occurs during context area retrieval or loading of dependencies,\nthis attribute is set with the error message. Otherwise, it is null.",
+              "description": "If an error occurs during context area retrieval or loading of dependencies,\r\nthis attribute is set with the error message. Otherwise, it is null.",
               "readonly": true,
               "attribute": "error"
             }
@@ -128,7 +128,7 @@
           "attributes": [
             {
               "name": "context-name",
-              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\nThe property `context-name` takes priority if it is set",
+              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\r\nThe property `context-name` takes priority if it is set",
               "fieldName": "contextName",
               "type": {
                 "text": "string"
@@ -136,7 +136,7 @@
             },
             {
               "name": "name",
-              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\nThe property `context-name` takes priority if it is set",
+              "description": "The name of the context area to load. Either `context-name` or `name` shall be set.\r\nThe property `context-name` takes priority if it is set",
               "fieldName": "name",
               "type": {
                 "text": "string"
@@ -147,7 +147,7 @@
               "type": {
                 "text": "number"
               },
-              "description": "Specifies the number of context area elements to render.\nIf this property is unset or has a non-positive value, all configured\nelements will be rendered.",
+              "description": "Specifies the number of context area elements to render.\r\nIf this property is unset or has a non-positive value, all configured\r\nelements will be rendered.",
               "fieldName": "take"
             },
             {
@@ -171,7 +171,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "The verbosity level of the component.\n\n- `silent`: No logs or warnings are produced.\n- `error`: Only warnings about errors during context area loading are produced. This is the default level.\n- `verbose`: Detailed logs about context area loading and microfrontend loading are produced.\n\nThe verbosity level can also be set globally using a meta tag in the document head:\n`<meta name=\"polyfea.context-verbosity\" content=\"silent|error|verbose\">`",
+              "description": "The verbosity level of the component.\r\n\r\n- `silent`: No logs or warnings are produced.\r\n- `error`: Only warnings about errors during context area loading are produced. This is the default level.\r\n- `verbose`: Detailed logs about context area loading and microfrontend loading are produced.\r\n\r\nThe verbosity level can also be set globally using a meta tag in the document head:\r\n`<meta name=\"polyfea.context-verbosity\" content=\"silent|error|verbose\">`",
               "fieldName": "verbosity"
             },
             {
@@ -179,7 +179,7 @@
               "type": {
                 "text": "string | null"
               },
-              "description": "If an error occurs during context area retrieval or loading of dependencies,\nthis attribute is set with the error message. Otherwise, it is null.",
+              "description": "If an error occurs during context area retrieval or loading of dependencies,\r\nthis attribute is set with the error message. Otherwise, it is null.",
               "readonly": true,
               "fieldName": "error"
             }
