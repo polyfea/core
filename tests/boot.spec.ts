@@ -12,7 +12,7 @@ test('coverage: register polyfea on loaded event if the document is not yet read
   });
 
   // when
-  await import('../src/boot?v=' + Math.random()); 
+  await import('../src/boot'); 
 
   expect(globalThis.polyfea).not.toBeDefined();
   w.dispatchEvent(new Event('load'));
