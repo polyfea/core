@@ -3,10 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "description": "Polyfea Core Library",
-  "main": "dist/components/index.js",
-  "module": "dist/components/index.js",
-  "es2015": "dist/components/index.js",
-  "es2017": "dist/components/index.js",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
   "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
