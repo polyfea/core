@@ -119,6 +119,23 @@ You can influence the behavior of the package by setting the `<meta>` tags in th
 | csp-none                    |         | Nonce to use for dynamically inserted scripts and styles. This nonce must match the nonce used in the [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_Security_Policy) header. This method is safe, as scripts must be secured before being able to read the DOM. |
 | polyfea.duplicit-custom-elements | warn | Behavior when duplicate custom elements are registered at [`window.customElements`](https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements). Possible values are `silent`, `verbose`, `warn`, and `error`. |
 
+# customElements.defineLazy
+
+The core driver also adds `customElements.defineLazy(tag: string, loadFn:  string | async ()=> Promise)` method to enable lazy loading of custom element modules in polyfea controller. The DOM mutations are observed (deeply, accross shadowDOM) when there is pending, not yet use registration of the custom element,  and as soon as the element with the registered tag is used in the document (including nested shadow documents) its module is loaded. The loaded module (or loadFn) for registering the actual element with customELementDefine. The `loadFn`may be string, in this case it is translated into `import(loadFn)` call. Do not use relative paths in this case, and ensure the module may be loaded either from absolute path/URL or you have [importmaps](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap) provided to load the module. See also [Create the microfrontend resource](https://polyfea.github.io/documentation/tutorials/k8s-manifests/?h=importmap#step-7-create-the-microfrontend-resource) in polyfea documentation on how to declare importmaps for Polyfea Controller. 
+
+In your microfrontend module you can then use code like this: 
+
+```ts
+// assuming /my-element.js calls customElement.define('my-element', MyElement)
+if( (customElements as any).defineLazy !== undefined ) {
+  (customElements as any).defineLazy(
+    'my-element', await import('./my-element.js')
+  );
+} else {
+    import('./my-element.js');
+}
+```
+
 ## Developing
 
 To begin development on this package, follow these steps:

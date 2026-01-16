@@ -58,6 +58,8 @@ tasks:
     sources:
       - src/**/*.ts
       - vite.index.ts
+      - package.json
+      - package-lock.json
   build.boot:
     cmds:
       - npm run build.boot
@@ -67,6 +69,8 @@ tasks:
     sources:
       - src/**/*.ts
       - vite.boot.ts
+      - package.json
+      - package-lock.json
   install:
     desc: Install Package dependencies
     cmds:
