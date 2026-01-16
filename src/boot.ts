@@ -1,5 +1,6 @@
 // this is the entry point bundle for the browser
 import { Polyfea, PolyfeaContext } from '.';
+import { LazyCustomElements } from './lazy-custom-elements';
 
 function bootstrapPolyfea() {
   if (Polyfea.initialize()) {
@@ -21,6 +22,7 @@ function bootstrapPolyfea() {
       console.groupEnd();
     }
   }
+  new LazyCustomElements()
 }
 
 if (document.readyState === 'complete') {
