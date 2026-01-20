@@ -79,7 +79,7 @@ export class PolyfeaContext extends HTMLElement {
 
   /** The name of the context area to load. Either `context-name` or `name` shall be set.
    *  The property `context-name` takes priority if it is set
-   * 
+   *
    * @attr name
    **/
   set name(name: string) {
@@ -89,7 +89,7 @@ export class PolyfeaContext extends HTMLElement {
 
   /** The name of the context area to load. Either `context-name` or `name` shall be set.
    *  The property `context-name` takes priority if it is set
-   * 
+   *
    * @attr name
    **/
   get name(): string {
@@ -104,7 +104,7 @@ export class PolyfeaContext extends HTMLElement {
    * Specifies the number of context area elements to render.
    * If this property is unset or has a non-positive value, all configured
    * elements will be rendered.
-   * 
+   *
    * @attr take
    */
   get take(): number {
@@ -134,7 +134,7 @@ export class PolyfeaContext extends HTMLElement {
    * 1. The `context` attribute, with its value set to the `name` property.
    * 2. The attributes defined in the element specification of the context area.
    * 3. The attributes defined in this property.
-   * 
+   *
    * @attr extra-attributes
    */
   get extraAttributes(): { [key: string]: string } {
@@ -153,7 +153,7 @@ export class PolyfeaContext extends HTMLElement {
    * 1. The `context` attribute, with its value set to the `name` property.
    * 2. The attributes defined in the element specification of the context area.
    * 3. The attributes defined in this property.
-   * 
+   *
    * @attr extra-attributes
    */
   set extraAttributes(attrs: { [key: string]: string }) {
@@ -167,7 +167,7 @@ export class PolyfeaContext extends HTMLElement {
    *
    * 1. Style properties defined in the element specification of the context area.
    * 2. Style properties defined in this property.
-   * 
+   *
    * @attr extra-style
    */
   set extraStyle(style: { [key: string]: string | number }) {
@@ -180,7 +180,7 @@ export class PolyfeaContext extends HTMLElement {
    * @remarks The style properties are set in the following order:
    * 1. Style properties defined in the element specification of the context area.
    * 2. Style properties defined in this property.
-   * 
+   *
    * @attr extra-style
    */
   get extraStyle(): { [key: string]: string | number } {
@@ -189,15 +189,18 @@ export class PolyfeaContext extends HTMLElement {
       try {
         return JSON.parse(styleStr);
       } catch (e) {
-        return styleStr.split(';').reduce((acc, style) => {
-          const index = style.indexOf(':');
-          if (index > 0) {
-            const key = style.substring(0, index).trim();
-            const value = style.substring(index + 1).trim();
-            if (key) acc[key] = value;
-          }
-          return acc;
-        }, {} as { [key: string]: string | number });
+        return styleStr.split(';').reduce(
+          (acc, style) => {
+            const index = style.indexOf(':');
+            if (index > 0) {
+              const key = style.substring(0, index).trim();
+              const value = style.substring(index + 1).trim();
+              if (key) acc[key] = value;
+            }
+            return acc;
+          },
+          {} as { [key: string]: string | number },
+        );
       }
     }
     return {};
@@ -273,7 +276,7 @@ export class PolyfeaContext extends HTMLElement {
 
   /** @ignore */
   #elements$: BehaviorSubject<ElementSpec[]> = new BehaviorSubject<ElementSpec[]>([]);
-  
+
   /** @ignore */
   #contextName$: Subject<string> = new Subject<string>();
 
@@ -361,6 +364,19 @@ export class PolyfeaContext extends HTMLElement {
     this.contextName = '';
   }
 
+  /** @ignore */
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (oldValue !== newValue) {
+      if (name === 'context-name' || name === 'name') {
+        this.#contextName$.next(this.contextName);
+      } else if (name === 'take') {
+        this.#take$.next(this.take);
+      } else if (name.startsWith('extra-')) {
+        this.#scheduleRender();
+      }
+    }
+  }
+  
   /** @ignore */
   #scheduleRender() {
     if (this.#scheduled) return;
@@ -462,55 +478,148 @@ export class PolyfeaContext extends HTMLElement {
 
   /** @ignore */
   #render() {
-    let innerHTML = `<style>:host { display: contents; }</style>`;
-    this.#elements.forEach((element, ix) => {
-      let attrs: { [key: string]: string } = {
-        id: (this.id || this.contextName) + `-${element.tagName}-${ix}`,
-        context: `${this.contextName}`,
-        ...element.attributes,
-        ...this.#extraPrefixedAttributes,
-        ...this.extraAttributes,
-      };
+    this.#renderHostStyles();
 
-      let styleObj = Object.assign({}, element.style, this.extraStyle);
-      let styleStr = Object.entries(styleObj)
-        .map(([key, value]) => `${key}: ${value};`)
-        .join(' ');
+    const existingElements = Array.from(this.shadowRoot!.children).filter(
+      el => el.tagName !== 'STYLE' && el.tagName !== 'SLOT',
+    );
 
-      let attrStr = Object.entries(attrs)
-        .map(([key, value]) => `${key}="${value}"`)
-        .join(' ');
-
-      innerHTML += `<${element.tagName} ${attrStr} style="${styleStr}"></${element.tagName}>`;
+    // reconcile elements
+    this.#elements.forEach((elementData, index) => {
+      let el = existingElements.length > index ? existingElements[index] : null;
+      this.#reconcileElement(elementData, el, index);
     });
 
-    if (!this.#elements.length) {
-      if (this.verbosity === PolyfeaContext.VERBOSITY_VERBOSE) {
-        console.log(
-          `[Polyfea]: <polyfea-context name="${this.contextName}">: No elements in context area, rendering slotted content.`,
-        );
-      }
-      if (!this.error) {
-        innerHTML += `<slot></slot>`;
+    // remove extra elements
+    if (existingElements.length > this.#elements.length) {
+      for (let i = this.#elements.length; i < existingElements.length; i++) {
+        existingElements[i].remove();
       }
     }
+    this.#renderSlots();
+  }
+
+  #renderHostStyles() {
+    let styleEl = this.shadowRoot!.querySelector('style');
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      const nonce =
+        (globalThis as any).cspNonce ||
+        document.querySelector('meta[name="csp-nonce"]')?.getAttribute('content');
+      if (nonce) {
+        styleEl.setAttribute('nonce', nonce);
+      }
+      styleEl.textContent = ':host { display: contents; }';
+      this.shadowRoot!.prepend(styleEl);
+    }
+  }
+
+  #reconcileElement(elementData: ElementSpec, existing: Element | null, index: number) {
+    let connectElement = () => {}; // deffer connection after attributes and styles are set
+    // create or replace element if tagName differs
+
+    if (!existing || existing.tagName !== elementData.tagName.toUpperCase()) {
+      const newEl = document.createElement(elementData.tagName);
+      if (existing) {
+        this.shadowRoot!.replaceChild(newEl, existing);
+      } else {
+        const slot = this.shadowRoot!.querySelector('slot');
+        if (slot) {
+          connectElement = () => {
+            this.shadowRoot!.insertBefore(newEl, slot);
+          };
+        } else {
+          connectElement = () => {
+            this.shadowRoot!.appendChild(newEl);
+          };
+        }
+      }
+      existing = newEl;
+    }
+
+    const attrs = {
+      id: (this.id || this.contextName) + `-${elementData.tagName}-${index}`,
+      context: `${this.contextName}`,
+      ...elementData.attributes,
+      ...this.#extraPrefixedAttributes,
+      ...this.extraAttributes,
+    };
+
+    // sync attribute values
+    Object.entries(attrs).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        const strValue = String(value);
+        if (existing.getAttribute(key) !== strValue) {
+          existing.setAttribute(key, strValue);
+        }
+      }
+    });
+
+    // remove extra attributes
+    Array.from(existing.attributes).forEach(attr => {
+      if (!(attr.name in attrs)) {
+        existing.removeAttribute(attr.name);
+      }
+    });
+
+    // sync styles
+    existing.removeAttribute('style');
+
+    let styleObj = Object.assign({}, elementData.style, this.extraStyle);
+    Object.entries(styleObj).forEach(([key, value]) => {
+      if (key && value !== undefined && value !== null) {
+        const propName = key.trim();
+        let propValue = String(value).trim();
+        while (propValue.endsWith(';')) {
+          propValue = propValue.slice(0, -1).trim();
+        }
+
+        if (propName.startsWith('--')) {
+          (existing as HTMLElement).style.setProperty(propName, propValue);
+        } else {
+          const cssName = propName.replace(/[A-Z]/g, '-$&').toLowerCase(); //camelCase to kebab-case
+          (existing as HTMLElement).style.setProperty(cssName, propValue);
+        }
+      }
+    });
+
+    connectElement();
+  }
+
+  #renderSlots() {
+    // default a error slot
+    const existingDefaultSlot = this.shadowRoot!.querySelector('slot:not([name])');
+    const existingErrorSlot = this.shadowRoot!.querySelector("slot[name='error']");
+
+    // Default Slot Logic
+    if (!this.#elements.length && !this.error) {
+      if (!existingDefaultSlot) {
+        if (this.verbosity === PolyfeaContext.VERBOSITY_VERBOSE) {
+          console.log(
+            `[Polyfea]: <polyfea-context name="${this.contextName}">: No elements in context area, rendering slotted content.`,
+          );
+        }
+        const slot = document.createElement('slot');
+        this.shadowRoot!.appendChild(slot);
+      }
+    } else {
+      if (existingDefaultSlot) {
+        existingDefaultSlot.remove();
+      }
+    }
+
+    // Error Slot Logic
     if (this.error) {
-      innerHTML += `<slot name="error"></slot>`;
-    }
-
-    this.shadowRoot!.innerHTML = innerHTML;
-  }
-
-  /** @ignore */
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (oldValue !== newValue) {
-      if (name === 'context-name' || name === 'name') {
-        this.#contextName$.next(this.contextName);
-      } else if (name === 'take') {
-        this.#take$.next(this.take);
-      } else if (name.startsWith('extra-')) {
-        this.#scheduleRender();
+      if (!existingErrorSlot) {
+        const slot = document.createElement('slot');
+        slot.name = 'error';
+        this.shadowRoot!.appendChild(slot);
+      }
+    } else {
+      if (existingErrorSlot) {
+        existingErrorSlot.remove();
       }
     }
   }
+  
 }
