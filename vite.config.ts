@@ -2,6 +2,7 @@
 import { defineConfig } from 'vitest/config';
 import dts from 'vite-plugin-dts';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -71,6 +72,14 @@ export default
       strictOutput: true,
       entryRoot: 'src',
     }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'custom-elements.json',
+          dest: '' 
+        }
+      ]
+    })
   ],
   build: {
     lib: {

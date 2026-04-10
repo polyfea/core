@@ -204,7 +204,7 @@ export class LazyCustomElements {
       (loadFn as string).startsWith('.')
     ) {
       console.warn(
-        `[polyfea] Warning: using relative path string for loadFn in defineLazymay lead to unexpected results. Use lambda function returning dynamic import instead.`,
+        `[polyfea] Warning: using relative path string for loadFn in defineLazy may lead to unexpected results. Use lambda function returning dynamic import instead.`,
       );
     }
     // enforce singleton pattern and loose coupling by event dispatching instead of direct method call

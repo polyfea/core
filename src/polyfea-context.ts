@@ -44,6 +44,7 @@ export class PolyfeaContext extends HTMLElement {
     'extra-attributes',
     'extra-style',
     'verbosity',
+    'no-shadow',
   ];
 
   /** Verbosity level silent @see verbosity */
@@ -248,6 +249,42 @@ export class PolyfeaContext extends HTMLElement {
   get error(): string | null {
     return this.getAttribute('error');
   }
+
+
+  /**
+   * Specifies if the elements shall be rendered in the light DOM instead of shadow DOM. 
+   * This can be used if parent element assumes that its children are in the light DOM (e.g. using querySelector) 
+   * and the context area elements need to be rendered in this parent element.
+   * 
+   * Shall be used in boundary cases only and is not recommended for general use, as it may cause style 
+   * and id conflicts and may break encapsulation of microfrontends.
+   * 
+   * 
+   * @attr no-shadow
+   */
+  set noShadow(value:boolean) {
+    if (value) {
+     this.setAttribute('no-shadow', '');
+    } else {
+      this.removeAttribute('no-shadow');
+    }
+
+  }
+
+  /**
+   * Specifies if the elements shall be rendered in the light DOM instead of shadow DOM. 
+   * This can be used if parent element assumes that its children are in the light DOM (e.g. using querySelector) 
+   * and the context area elements need to be rendered in this parent element.
+   * 
+   * Shall be used in boundary cases only and is not recommended for general use, as it may cause style 
+   * and id conflicts and may break encapsulation of microfrontends.
+   * 
+   * @attr no-shadow
+   */
+  get noShadow(): boolean {
+    return !!this.hasAttribute('no-shadow');
+  }
+
 
   /** used internally to detect cyclic context areas
    * @ignore
@@ -497,8 +534,11 @@ export class PolyfeaContext extends HTMLElement {
     if (this.error) {
       innerHTML += `<slot name="error"></slot>`;
     }
-
-    this.shadowRoot!.innerHTML = innerHTML;
+    if (this.noShadow) {
+      this.innerHTML = innerHTML;
+    } else {
+      this.shadowRoot!.innerHTML = innerHTML;
+    }
   }
 
   /** @ignore */
@@ -508,7 +548,7 @@ export class PolyfeaContext extends HTMLElement {
         this.#contextName$.next(this.contextName);
       } else if (name === 'take') {
         this.#take$.next(this.take);
-      } else if (name.startsWith('extra-')) {
+      } else if (name.startsWith('extra-') || name === 'no-shadow') {
         this.#scheduleRender();
       }
     }

@@ -33,6 +33,7 @@
 | `extraStyle`      |         | `{ [key: string]: string \| number }` |         | Additional style properties to be set on the rendered elements.                                                                                                                                                                                                                                                                                                                                                                                                                                    |                |
 | `verbosity`       |         | `string`                              |         | The verbosity level of the component.&#xA;&#xA;- \`silent\`: No logs or warnings are produced.&#xA;- \`error\`: Only warnings about errors during context area loading are produced. This is the default level.&#xA;- \`verbose\`: Detailed logs about context area loading and microfrontend loading are produced.&#xA;&#xA;The verbosity level can also be set globally using a meta tag in the document head:&#xA;\`\<meta name="polyfea.context-verbosity" content="silent\|error\|verbose">\` |                |
 | `error`           |         | `string \| null`                      |         | If an error occurs during context area retrieval or loading of dependencies,&#xA;this attribute is set with the error message. Otherwise, it is null.                                                                                                                                                                                                                                                                                                                                              |                |
+| `noShadow`        |         | `boolean`                             |         | Specifies if the elements shall be rendered in the light DOM instead of shadow DOM. &#xA;This can be used if parent element assumes that its children are in the light DOM (e.g. using querySelector) &#xA;and the context area elements need to be rendered in this parent element.&#xA;&#xA;Shall be used in boundary cases only and is not recommended for general use, as it may cause style &#xA;and id conflicts and may break encapsulation of microfrontends.                              |                |
 
 ### Attributes
 
@@ -44,6 +45,7 @@
 | `extra-attributes` | extraAttributes |                |
 | `extra-style`      | extraStyle      |                |
 | `verbosity`        | verbosity       |                |
+| `no-shadow`        | noShadow        |                |
 | `error`            | error           |                |
 
 ### Slots

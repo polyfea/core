@@ -123,6 +123,15 @@
               "description": "If an error occurs during context area retrieval or loading of dependencies,\nthis attribute is set with the error message. Otherwise, it is null.",
               "readonly": true,
               "attribute": "error"
+            },
+            {
+              "kind": "field",
+              "name": "noShadow",
+              "description": "Specifies if the elements shall be rendered in the light DOM instead of shadow DOM. \nThis can be used if parent element assumes that its children are in the light DOM (e.g. using querySelector) \nand the context area elements need to be rendered in this parent element.\n\nShall be used in boundary cases only and is not recommended for general use, as it may cause style \nand id conflicts and may break encapsulation of microfrontends.",
+              "attribute": "no-shadow",
+              "type": {
+                "text": "boolean"
+              }
             }
           ],
           "attributes": [
@@ -173,6 +182,14 @@
               },
               "description": "The verbosity level of the component.\n\n- `silent`: No logs or warnings are produced.\n- `error`: Only warnings about errors during context area loading are produced. This is the default level.\n- `verbose`: Detailed logs about context area loading and microfrontend loading are produced.\n\nThe verbosity level can also be set globally using a meta tag in the document head:\n`<meta name=\"polyfea.context-verbosity\" content=\"silent|error|verbose\">`",
               "fieldName": "verbosity"
+            },
+            {
+              "name": "no-shadow",
+              "description": "Specifies if the elements shall be rendered in the light DOM instead of shadow DOM. \nThis can be used if parent element assumes that its children are in the light DOM (e.g. using querySelector) \nand the context area elements need to be rendered in this parent element.\n\nShall be used in boundary cases only and is not recommended for general use, as it may cause style \nand id conflicts and may break encapsulation of microfrontends.",
+              "fieldName": "noShadow",
+              "type": {
+                "text": "boolean"
+              }
             },
             {
               "name": "error",
