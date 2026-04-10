@@ -3558,7 +3558,7 @@ The **`writingSuggestions`** property of the HTMLElement interface is a string i
 
 > `readonly` `static` **VERBOSITY\_ERROR**: `"error"` = `'error'`
 
-Defined in: [src/polyfea-context.ts:54](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L54)
+Defined in: [src/polyfea-context.ts:53](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L53)
 
 Verbosity level error
 
@@ -3572,7 +3572,7 @@ verbosity
 
 > `readonly` `static` **VERBOSITY\_SILENT**: `"silent"` = `'silent'`
 
-Defined in: [src/polyfea-context.ts:51](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L51)
+Defined in: [src/polyfea-context.ts:50](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L50)
 
 Verbosity level silent
 
@@ -3586,7 +3586,7 @@ verbosity
 
 > `readonly` `static` **VERBOSITY\_VERBOSE**: `"verbose"` = `'verbose'`
 
-Defined in: [src/polyfea-context.ts:57](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L57)
+Defined in: [src/polyfea-context.ts:56](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L56)
 
 Verbosity level verbose
 
@@ -3640,7 +3640,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:10714
 
 > **get** **contextName**(): `string`
 
-Defined in: [src/polyfea-context.ts:73](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L73)
+Defined in: [src/polyfea-context.ts:72](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L72)
 
 The name of the context area to load. Either `context-name` or `name` shall be set.
  The property `context-name` takes priority if it is set
@@ -3657,7 +3657,7 @@ context-name
 
 > **set** **contextName**(`name`): `void`
 
-Defined in: [src/polyfea-context.ts:64](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L64)
+Defined in: [src/polyfea-context.ts:63](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L63)
 
 The name of the context area to load. Either `context-name` or `name` shall be set.
  The property `context-name` takes priority if it is set
@@ -3684,11 +3684,7 @@ context-name
 
 > **get** **error**(): `string` \| `null`
 
-<<<<<<< HEAD
-Defined in: [src/polyfea-context.ts:249](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L249)
-=======
 Defined in: [src/polyfea-context.ts:251](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L251)
->>>>>>> 3940a14dd48c573f5a2248e7f9c7beee7a1835a9
 
 If an error occurs during context area retrieval or loading of dependencies,
  this attribute is set with the error message. Otherwise, it is null.
@@ -3709,7 +3705,7 @@ error
 
 > **get** **extraAttributes**(): `object`
 
-Defined in: [src/polyfea-context.ts:141](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L141)
+Defined in: [src/polyfea-context.ts:140](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L140)
 
 Defines additional attributes to be set on the rendered elements.
 
@@ -3733,7 +3729,7 @@ extra-attributes
 
 > **set** **extraAttributes**(`attrs`): `void`
 
-Defined in: [src/polyfea-context.ts:160](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L160)
+Defined in: [src/polyfea-context.ts:159](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L159)
 
 Defines additional attributes to be set on the rendered elements.
 
@@ -3765,7 +3761,7 @@ extra-attributes
 
 > **get** **extraStyle**(): `object`
 
-Defined in: [src/polyfea-context.ts:187](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L187)
+Defined in: [src/polyfea-context.ts:186](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L186)
 
 Additional style properties to be set on the rendered elements.
 
@@ -3787,7 +3783,7 @@ extra-style
 
 > **set** **extraStyle**(`style`): `void`
 
-Defined in: [src/polyfea-context.ts:174](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L174)
+Defined in: [src/polyfea-context.ts:173](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L173)
 
 Additional style properties to be set on the rendered elements.
 
@@ -3818,7 +3814,7 @@ extra-style
 
 > **get** **name**(): `string`
 
-Defined in: [src/polyfea-context.ts:96](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L96)
+Defined in: [src/polyfea-context.ts:95](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L95)
 
 The name of the context area to load. Either `context-name` or `name` shall be set.
  The property `context-name` takes priority if it is set
@@ -3835,7 +3831,7 @@ name
 
 > **set** **name**(`name`): `void`
 
-Defined in: [src/polyfea-context.ts:86](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L86)
+Defined in: [src/polyfea-context.ts:85](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L85)
 
 The name of the context area to load. Either `context-name` or `name` shall be set.
  The property `context-name` takes priority if it is set
@@ -3849,58 +3845,6 @@ name
 ###### name
 
 `string`
-
-##### Returns
-
-`void`
-
-***
-
-### noShadow
-
-#### Get Signature
-
-> **get** **noShadow**(): `boolean`
-
-Defined in: [src/polyfea-context.ts:284](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L284)
-
-Specifies if the elements shall be rendered in the light DOM instead of shadow DOM. 
-This can be used if parent element assumes that its children are in the light DOM (e.g. using querySelector) 
-and the context area elements need to be rendered in this parent element.
-
-Shall be used in boundary cases only and is not recommended for general use, as it may cause style 
-and id conflicts and may break encapsulation of microfrontends.
-
-##### Attr
-
-no-shadow
-
-##### Returns
-
-`boolean`
-
-#### Set Signature
-
-> **set** **noShadow**(`value`): `void`
-
-Defined in: [src/polyfea-context.ts:265](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L265)
-
-Specifies if the elements shall be rendered in the light DOM instead of shadow DOM. 
-This can be used if parent element assumes that its children are in the light DOM (e.g. using querySelector) 
-and the context area elements need to be rendered in this parent element.
-
-Shall be used in boundary cases only and is not recommended for general use, as it may cause style 
-and id conflicts and may break encapsulation of microfrontends.
-
-##### Attr
-
-no-shadow
-
-##### Parameters
-
-###### value
-
-`boolean`
 
 ##### Returns
 
@@ -3988,7 +3932,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:11120
 
 > **get** **take**(): `number`
 
-Defined in: [src/polyfea-context.ts:111](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L111)
+Defined in: [src/polyfea-context.ts:110](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L110)
 
 Specifies the number of context area elements to render.
 If this property is unset or has a non-positive value, all configured
@@ -4006,7 +3950,7 @@ take
 
 > **set** **take**(`take`): `void`
 
-Defined in: [src/polyfea-context.ts:126](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L126)
+Defined in: [src/polyfea-context.ts:125](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L125)
 
 Specifies the number of context area elements to render.
 If this property is unset or has a non-positive value, all configured
@@ -4074,11 +4018,7 @@ The **`textContent`** property of the Node interface represents the text content
 
 > **get** **verbosity**(): `string`
 
-<<<<<<< HEAD
-Defined in: [src/polyfea-context.ts:218](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L218)
-=======
 Defined in: [src/polyfea-context.ts:220](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L220)
->>>>>>> 3940a14dd48c573f5a2248e7f9c7beee7a1835a9
 
 The verbosity level of the component.
 
@@ -4101,11 +4041,7 @@ verbosity
 
 > **set** **verbosity**(`v`): `void`
 
-<<<<<<< HEAD
-Defined in: [src/polyfea-context.ts:240](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L240)
-=======
 Defined in: [src/polyfea-context.ts:242](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L242)
->>>>>>> 3940a14dd48c573f5a2248e7f9c7beee7a1835a9
 
 The verbosity level of the component.
 
