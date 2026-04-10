@@ -3684,7 +3684,11 @@ context-name
 
 > **get** **error**(): `string` \| `null`
 
+<<<<<<< HEAD
 Defined in: [src/polyfea-context.ts:249](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L249)
+=======
+Defined in: [src/polyfea-context.ts:251](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L251)
+>>>>>>> 3940a14dd48c573f5a2248e7f9c7beee7a1835a9
 
 If an error occurs during context area retrieval or loading of dependencies,
  this attribute is set with the error message. Otherwise, it is null.
@@ -4070,7 +4074,11 @@ The **`textContent`** property of the Node interface represents the text content
 
 > **get** **verbosity**(): `string`
 
+<<<<<<< HEAD
 Defined in: [src/polyfea-context.ts:218](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L218)
+=======
+Defined in: [src/polyfea-context.ts:220](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L220)
+>>>>>>> 3940a14dd48c573f5a2248e7f9c7beee7a1835a9
 
 The verbosity level of the component.
 
@@ -4093,7 +4101,11 @@ verbosity
 
 > **set** **verbosity**(`v`): `void`
 
+<<<<<<< HEAD
 Defined in: [src/polyfea-context.ts:240](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L240)
+=======
+Defined in: [src/polyfea-context.ts:242](https://github.com/polyfea/core/blob/main/src/polyfea-context.ts#L242)
+>>>>>>> 3940a14dd48c573f5a2248e7f9c7beee7a1835a9
 
 The verbosity level of the component.
 

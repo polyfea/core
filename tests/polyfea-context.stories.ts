@@ -599,6 +599,27 @@ export const TEST_PropertyChange: Story = {
       contextElement.take = 1;
     });
 
+    await step('it shall replace elements if order of elements differs', async () => {
+      const contextElement = canvasElement.querySelector('polyfea-context') as PolyfeaContext;
+      await expect(contextElement).toBeTruthy();
+      const diffElement = document. createElement('div');
+      contextElement!.shadowRoot!.prepend(diffElement);
+      contextElement!.take = 1;
+      await waitFor(
+        async () => {
+          contextElement.shadowRoot!.childElementCount === 1;
+          const welcomeElement = await withinShadow(contextElement!).findByShadowText('Zdravím engineer');
+          await expect(welcomeElement).toBeTruthy();
+        },
+        {
+          timeout: 5000,
+        },
+      );
+      contextElement.take = 1;
+    });
+
+
+
     await step('☂️ reflect change of name property', async () => {
       const contextElement = canvasElement.querySelector('polyfea-context') as PolyfeaContext;
       await expect(contextElement).toBeTruthy();
@@ -617,12 +638,13 @@ export const TEST_PropertyChange: Story = {
     await step('☂️ reflect change of extra-style property', async () => {
       const contextElement = canvasElement.querySelector('polyfea-context') as PolyfeaContext;
       await expect(contextElement).toBeTruthy();
-      contextElement!.extraStyle = { color: 'rgb(255, 125, 255);' };
+      contextElement!.extraStyle = { color: 'rgb(255, 125, 255);', "--test-prop": "value" };
       const welcome = await withinShadow(contextElement!).findByShadowText('Hello engineer');
       await expect(welcome).toBeTruthy();
       await waitFor(async() => {
         let welcomeElement =contextElementShadow?.querySelector('welcome-element');
         await expect(welcomeElement).toHaveStyle('color: rgb(255, 125, 255);');
+        await expect(welcomeElement).toHaveStyle('--test-prop: value;');
       }, {timeout: 3000});
     });
   },
