@@ -569,7 +569,7 @@ class NavigationPolyfill extends EventTarget {
       value.doRegister(raiseHistoryPopState);
       return value as Navigation;
     }
-    return globalThis.navigation;
+    return globalThis.navigation as unknown as  Navigation;
   }
 
   public static unregister() {    
@@ -577,13 +577,13 @@ class NavigationPolyfill extends EventTarget {
       (globalThis.navigation as NavigationPolyfill).doUnregister
         ? (globalThis.navigation as NavigationPolyfill).doUnregister()
         : null;
-      globalThis.navigation = undefined;
+      (globalThis as any ).navigation = undefined ;
     }
   }
 
   private doRegister(raiseHistoryPopState: boolean) {
     if (!globalThis.navigation) {
-      globalThis.navigation = this as Navigation;
+      (globalThis as any).navigation = this as Navigation;
       this.entriesList = [
         new NavigationHistoryEntryPolyfill(
           this,
