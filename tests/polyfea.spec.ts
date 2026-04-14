@@ -3,7 +3,6 @@ import { afterEach, assert, beforeEach, expect, test, beforeAll, afterAll } from
 
 import { Polyfea } from '../src/polyfea';
 import { firstValueFrom } from 'rxjs';
-import { type Navigation } from '../src/navigation';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
@@ -201,14 +200,6 @@ test('initialize: Initialize registers polyfea on global object', async () => {
   expect((globalThis as any).polyfea).toBeDefined();
 });
 
-test('initialize: Initialize registers  navigation polyfill if it is not available', async () => {
-  // given
-  assert(!globalThis.navigation);
-  // when
-  Polyfea.initialize();
-  // then
-  expect((globalThis as any).navigation).toBeDefined();
-});
 
 test('getOrCreate: when initialized then getOrCreate returns registered instance', async () => {
   // given

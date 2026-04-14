@@ -10,12 +10,10 @@ import {
 import { type PolyfeaBackend } from './internal';
 import { StaticBackend } from './static-backend';
 import { FetchBackend } from './fetch-backend';
-import { NavigateEvent, type Navigation, registerNavigationPolyfill } from './navigation';
 import { Configuration, type ContextArea, type MicrofrontendResource } from '@polyfea/browser-api';
 
 declare global {
   var polyfea: Polyfea;
-  var navigation: Navigation | undefined;
   var polyfeaNavigation$: Observable<string> | undefined;
 }
 /**
@@ -313,7 +311,6 @@ class PolyfeaImpl implements Polyfea {
     if (!globalThis.polyfea) {
       globalThis.polyfea = new PolyfeaImpl();
     }
-    registerNavigationPolyfill();
 
     /// custom elements can be repeatedly registered due to the rebundling in multiple web-components
     // get meta tag with name polyfea.duplicit-custom-elements
