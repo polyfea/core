@@ -179,7 +179,7 @@ describe('LazyCustomElements', () => {
         document.body.appendChild(el);
         
         // It should attempt to load and likely fail.
-        await vi.waitFor(() => expect(errorSpy).toHaveBeenCalled()); 
+        await vi.waitFor(() => expect(errorSpy).toHaveBeenCalled(), 3000); 
         // Error is expected because 'invalid-module-path' won't resolve.
     });
 

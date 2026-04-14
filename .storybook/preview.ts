@@ -1,18 +1,18 @@
 import type { Preview } from "@storybook/web-components-vite";
-import "./browser-test-setup";
+
 import { initialize, mswLoader } from "msw-storybook-addon";
 import { within as withinShadow } from "shadow-dom-testing-library";
 
 import { globalHandlers } from "./msw-handlers/index.js";
 import { setupWorker } from "msw/browser";
-import "./canvas.css";
+//import "./canvas.css";
 
 import { setCustomElementsManifest } from "@storybook/web-components";
-import customElements from "../custom-elements.json";
+//import customElements from "../custom-elements.json";
 
 initialize();
 
-setCustomElementsManifest(customElements);
+//  setCustomElementsManifest(customElements);
 
 if (
   typeof globalThis.process === "undefined" ||

@@ -28,7 +28,5 @@ function bootstrapPolyfea() {
 if (document.readyState === 'complete') {
   bootstrapPolyfea();
 } 
-globalThis.addEventListener('load', () => {
-  bootstrapPolyfea();
-});
+globalThis.addEventListener('load', bootstrapPolyfea);
 

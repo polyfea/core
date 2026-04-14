@@ -3,7 +3,7 @@ import { test, expect, vi } from 'vitest';
 test('coverage: register polyfea on loaded event if the document is not yet ready', async () => {
   // given
   const w = globalThis as unknown as Window;
-  vi.resetModules()
+  vi.resetModules();
 
   const oldState = w.document.readyState;
   Object.defineProperty(w.document, 'readyState', {
@@ -12,7 +12,7 @@ test('coverage: register polyfea on loaded event if the document is not yet read
   });
 
   // when
-  await import('../src/boot'); 
+  await import('../src/boot#'+Math.random());
 
   expect(globalThis.polyfea).not.toBeDefined();
   w.dispatchEvent(new Event('load'));

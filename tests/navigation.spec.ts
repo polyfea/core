@@ -9,7 +9,7 @@ import {
 import { href } from '../src/href';
 
 beforeEach(() => {
-  globalThis.navigation = undefined;
+  (globalThis as any).navigation = undefined;
 });
 
 afterEach(() => {
@@ -139,7 +139,7 @@ test('href: using history if navigation api is not available', async () => {
   //given
   let wasIntercepted = false;
 
-  globalThis.navigation = undefined;
+  (globalThis as any).navigation = undefined;
   const oldPushState = history.pushState;
   try {
     history.pushState = function (data: any, title: string, url?: string | null) {

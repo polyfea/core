@@ -1,5 +1,5 @@
 
-import { assert, beforeEach, expect, test, beforeAll, afterAll, afterEach } from 'vitest'
+import { assert, beforeEach, expect, test, beforeAll, afterAll, afterEach, vi } from 'vitest'
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import { Configuration, PolyfeaApi, type ContextArea} from '@polyfea/browser-api';
@@ -148,7 +148,7 @@ test('getContextArea: Fetched Context areas requests are stored in local storage
     const contextArea = JSON.parse(cache as string) as ContextArea;
 
     // then
-    expect(contextArea).toEqual(expectedContextArea);
+    await vi.waitFor(() => expect(contextArea).toEqual(expectedContextArea));
 });
 
 test('getContextArea: LocalStorage shall be used to get context areas', async () => {
