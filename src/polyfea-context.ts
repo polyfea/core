@@ -15,17 +15,17 @@ import {
 import { type ContextArea, type ElementSpec } from '@polyfea/browser-api';
 
 /**
- * @name polyfea-context
- * @description This component uses the Polyfea interface to load a context area, dynamically render its elements,
+ * This component uses the Polyfea interface to load a context area, dynamically render its elements,
  * and load the resources for the associated microfrontend before rendering the elements.
  * If the context area cannot be retrieved or it has no elements, the slotted content is displayed instead.
  *
- * @remarks For more details on the ContextArea type, refer to the @polyfea/browser-api package documentation.
- * The path for context area requests is relative to document.baseURI.
  *
  * @slot - The slotted content is displayed if the context area  has no elements.
  * @slot error - This slot is present if an error occurs during context area retrieval or loading of dependencies, together with setting error attribute
  *   on the polyfea-context element
+ * 
+ * @remarks For more details on the ContextArea type, refer to the @polyfea/browser-api package documentation.
+ * The path for context area requests is relative to document.baseURI.
  *
  */
 export class PolyfeaContext extends HTMLElement {
@@ -46,13 +46,19 @@ export class PolyfeaContext extends HTMLElement {
     'verbosity',
   ];
 
-  /** Verbosity level silent @see verbosity */
+  /** Verbosity level silent 
+   * @see verbosity 
+   **/
   static readonly VERBOSITY_SILENT = 'silent';
 
-  /** Verbosity level error @see verbosity */
+  /** Verbosity level error 
+   * @see verbosity 
+   **/
   static readonly VERBOSITY_ERROR = 'error';
 
-  /** Verbosity level verbose @see verbosity */
+  /** Verbosity level verbose 
+   * @see verbosity 
+   **/
   static readonly VERBOSITY_VERBOSE = 'verbose';
 
   /** The name of the context area to load. Either `context-name` or `name` shall be set.

@@ -36,7 +36,7 @@ ContextArea
 
 ### microfrontends?
 
-> `optional` **microfrontends**: `object`
+> `optional` **microfrontends?**: `object`
 
 Defined in: node\_modules/@polyfea/browser-api/lib/models/ContextArea.d.ts:39
 

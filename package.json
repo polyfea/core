@@ -33,7 +33,7 @@
     "cem": "cem analyze --globs src/polyfea-context.ts",
     "cem-doc": "node ./.scripts/cem-md.js",
     "build": "run-s build.index build.boot cem cem-doc typedoc",
-    "typedoc": "npx typedoc --plugin typedoc-plugin-markdown --gitRevision main --blockTags @attr --blockTags @slot src/index.ts"
+    "typedoc": "npx typedoc"
   },
   "dependencies": {
     "@polyfea/browser-api": "^1.0.4",

@@ -22,7 +22,7 @@ ElementSpec
 
 ### attributes?
 
-> `optional` **attributes**: `object`
+> `optional` **attributes?**: `object`
 
 Defined in: node\_modules/@polyfea/browser-api/lib/models/ElementSpec.d.ts:46
 
@@ -40,7 +40,7 @@ ElementSpec
 
 ### microfrontend?
 
-> `optional` **microfrontend**: `string`
+> `optional` **microfrontend?**: `string`
 
 Defined in: node\_modules/@polyfea/browser-api/lib/models/ElementSpec.d.ts:32
 
@@ -57,7 +57,7 @@ ElementSpec
 
 ### style?
 
-> `optional` **style**: `object`
+> `optional` **style?**: `object`
 
 Defined in: node\_modules/@polyfea/browser-api/lib/models/ElementSpec.d.ts:56
 

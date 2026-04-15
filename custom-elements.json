@@ -8,7 +8,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "This component uses the Polyfea interface to load a context area, dynamically render its elements,\nand load the resources for the associated microfrontend before rendering the elements.\nIf the context area cannot be retrieved or it has no elements, the slotted content is displayed instead.",
           "name": "PolyfeaContext",
           "slots": [
             {

@@ -8,7 +8,7 @@
 
 > **Polyfea**: `object`
 
-Defined in: [src/polyfea.ts:48](https://github.com/polyfea/core/blob/main/src/polyfea.ts#L48)
+Defined in: [src/polyfea.ts:46](https://github.com/polyfea/core/blob/main/src/polyfea.ts#L46)
 
 ## Type Declaration
 
@@ -50,6 +50,5 @@ This method is typically invoked by the polyfea controller script `boot.ts`.
 
 #### Remarks
 
-This method also initializes the Navigation polyfill if it's not already present.
 It augments `window.customElements.define` to allow for duplicate registration of custom elements.
 This is particularly useful when different microfrontends need to register the same dependencies.

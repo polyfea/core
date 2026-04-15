@@ -413,7 +413,7 @@ export const TEST_Navigation: Story = {
     });
 
     await step(`it shall render "Paris" if pushed state is france`, async () => {
-      globalThis.history.pushState({}, '', '/france');
+      globalThis.navigation.navigate('/france');
       await waitFor(
         async () => {
           await expect(contextElement).toHaveAttribute('context-name', 'navigate');

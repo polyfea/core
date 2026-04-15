@@ -56,14 +56,15 @@ export interface Polyfea {
 
   /**
    * Load microfrontend resources for the given context area and microfrontend name. This resolves dependencies recursively.
+   * 
+   * Loading errors does not results in rejection as order of loading is not critical for the application and some elements and resources  may be optional
+   * for the microfrontend to function.
+   * Fully successful loads are represented as empty array.
    *
    * @param ctx - Context area specification.
    * @param name - Name of the microfrontend to load. This must be present in the context area specification.
    *
-   * @return A promise that resolves to an array of errors or nulls for each resource load.
-   * Loading errors does not results in rejection as order of loading is not critical for the application and some elements and resources  may be optional
-   * for the microfrontend to function.
-   * Fully successful loads are represented as empty array.
+   * @returns A promise that resolves to an array of errors or nulls for each resource load.
    *
    * @throws Never
    */
@@ -88,10 +89,10 @@ export const Polyfea = {
    * Initialize the polyfea driver in the global context.
    * This method is typically invoked by the polyfea controller script `boot.ts`.
    *
-   * @return `true` if the polyfea driver was initialized, `false` if it was already present.
+   * @returns `true` if the polyfea driver was initialized, `false` if it was already present.
    *
    * @remarks
-   * This method also initializes the Navigation polyfill if it's not already present.
+   * 
    * It augments `window.customElements.define` to allow for duplicate registration of custom elements.
    * This is particularly useful when different microfrontends need to register the same dependencies.
    */

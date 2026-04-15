@@ -10,10 +10,8 @@ npm install @polyfea/core
 
 ## Documentation
 
-- The [_polyfea-context_](./polyfea-context.md) element loads microfrontends into the document, _replacing_ itself (by `display: contents`) with the microfrontend's content.
-- The [_Polyfea_](docs/classes/Polyfea.md) class is for advanced use cases, providing control over the loading of microfrontends and elements.
-- The [Navigation polyfill](docs/interfaces/Navigation.md) intercepts navigation events and enables programmatic navigation in browsers that don't yet support the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API). Deprecated for direct usage as most of modern browsers already support [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API)
-- The [href](https://github.com/polyfea/core/blob/main/docs/modules.md#href) function helps with navigation in the single page application.
+- The {@link PolyfeaContext | polyfea-context} element loads microfrontends into the document, _replacing_ itself (by `display: contents`) with the microfrontend's content.
+- The {@link Polyfea | Polyfea API}. class is for advanced use cases, providing control over the loading of microfrontends and elements.
 
 ## Usage
 

@@ -6,7 +6,7 @@
 
 # Interface: Polyfea
 
-Defined in: [src/polyfea.ts:48](https://github.com/polyfea/core/blob/main/src/polyfea.ts#L48)
+Defined in: [src/polyfea.ts:46](https://github.com/polyfea/core/blob/main/src/polyfea.ts#L46)
 
 Polyfea driver for loading microfrontends.
 
@@ -40,7 +40,7 @@ In this case, context areas are loaded only at document load using the
 
 > **getContextArea**(`contextName`): `Observable`\<[`ContextArea`](ContextArea.md)\>
 
-Defined in: [src/polyfea.ts:57](https://github.com/polyfea/core/blob/main/src/polyfea.ts#L57)
+Defined in: [src/polyfea.ts:55](https://github.com/polyfea/core/blob/main/src/polyfea.ts#L55)
 
 Get an observable for the context area. This provides the context area for the current document location path,
 relative to the `document.baseURI`.
@@ -65,9 +65,13 @@ Name of the context area.
 
 > **loadMicrofrontend**(`ctx`, `name`): `Promise`\<`Error`[]\>
 
-Defined in: [src/polyfea.ts:72](https://github.com/polyfea/core/blob/main/src/polyfea.ts#L72)
+Defined in: [src/polyfea.ts:71](https://github.com/polyfea/core/blob/main/src/polyfea.ts#L71)
 
 Load microfrontend resources for the given context area and microfrontend name. This resolves dependencies recursively.
+
+Loading errors does not results in rejection as order of loading is not critical for the application and some elements and resources  may be optional
+for the microfrontend to function.
+Fully successful loads are represented as empty array.
 
 #### Parameters
 
@@ -88,9 +92,6 @@ Name of the microfrontend to load. This must be present in the context area spec
 `Promise`\<`Error`[]\>
 
 A promise that resolves to an array of errors or nulls for each resource load.
-Loading errors does not results in rejection as order of loading is not critical for the application and some elements and resources  may be optional
-for the microfrontend to function.
-Fully successful loads are represented as empty array.
 
 #### Throws
 
