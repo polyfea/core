@@ -45,7 +45,7 @@ jobs:
 
       - id: semver
         uses: ildug/get-tag-action@v1
-      
+      - run: npm version --git-tag-version=false ${{ steps.semver.outputs.version }} 
       - name: Publish to NPM
         run: npm publish --provenance --access public
 
